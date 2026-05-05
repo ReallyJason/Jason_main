@@ -1,0 +1,65 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Mail } from 'lucide-react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import './Hero.css';
+
+const Hero: React.FC = () => {
+  return (
+    <section className="hero-section">
+      <div className="glow-blob glow-blue"></div>
+      
+      <div className="container hero-container">
+        <motion.div 
+          className="hero-content"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div 
+            className="hero-badge"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            <span className="pulse-dot"></span>
+            Available for new opportunities
+          </motion.div>
+
+          <h1 className="hero-title">
+            Hi, I'm <span className="text-gradient-accent">Jason Hu</span>.<br />
+            <span className="text-gradient">Software Developer & Entrepreneur.</span>
+          </h1>
+          
+          <p className="hero-subtitle">
+            I build sleek, scalable web applications, modern platforms, and engaging games. 
+            Passionate about bringing innovative ideas to life through code.
+          </p>
+
+          <div className="hero-actions">
+            <a href="#hive" className="btn btn-primary">
+              View Featured Project <ArrowRight className="btn-icon" size={20} />
+            </a>
+            <a href="#projects" className="btn btn-secondary">
+              Explore Work
+            </a>
+          </div>
+
+          <div className="hero-socials">
+            <a href="https://github.com/ReallyJason" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <FaGithub size={24} />
+            </a>
+            <a href="https://www.linkedin.com/in/jason-hu12" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FaLinkedin size={24} />
+            </a>
+            <a href="mailto:jhu0039@gmail.com" aria-label="Email">
+              <Mail size={24} />
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
