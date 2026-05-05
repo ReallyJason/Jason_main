@@ -42,9 +42,12 @@ const Hero: React.FC = () => {
             <a href="#hive" className="btn btn-primary">
               View Featured Project <ArrowRight className="btn-icon" size={20} />
             </a>
-            <a href="#projects" className="btn btn-secondary">
-              Explore Work
+            <a href="#about" className="btn btn-primary">
+              About Me <ArrowRight className="btn-icon" size={20} />
             </a>
+            {/* <a href="#projects" className="btn btn-secondary">
+              Explore Work
+            </a> */}
           </div>
 
           <div className="hero-socials">

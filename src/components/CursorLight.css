@@ -1,0 +1,26 @@
+.cursor-light {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle, 
+    rgba(0, 242, 255, 0.07) 0%, 
+    rgba(188, 19, 254, 0.03) 40%, 
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 100; /* Above most content */
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+}
+
+[data-theme="light"] .cursor-light {
+  background: radial-gradient(
+    circle, 
+    rgba(59, 130, 246, 0.05) 0%, 
+    transparent 70%
+  );
+  mix-blend-mode: multiply;
+}

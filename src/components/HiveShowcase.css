@@ -37,6 +37,8 @@
   animation: float 6s ease-in-out infinite;
   filter: drop-shadow(0 20px 30px rgba(255, 184, 0, 0.3));
   transform: translateX(-20px);
+  border: none;
+  background: transparent;
 }
 
 @keyframes float {
@@ -68,7 +70,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #FFB800;
+  color: #E59524;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   text-transform: uppercase;
@@ -76,9 +78,17 @@
   font-size: 0.875rem;
   margin-bottom: 16px;
   padding: 6px 16px;
+  background: #2D3E50;
+  border: 1px solid #E59524;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .hive-badge {
+  color: #FFB800;
   background: rgba(255, 184, 0, 0.1);
   border: 1px solid rgba(255, 184, 0, 0.2);
-  border-radius: 20px;
+  box-shadow: none;
 }
 
 .hive-link {

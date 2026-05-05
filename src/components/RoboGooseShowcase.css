@@ -118,34 +118,53 @@
 
 .robogoose-badge {
   display: inline-block;
-  color: #FF8C00;
+  background: #2D3E50;
+  color: #E59524;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.875rem;
   margin-bottom: 16px;
   padding: 6px 16px;
+  border: 1px solid #E59524;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .robogoose-badge {
+  color: #FF8C00;
   background: rgba(255, 140, 0, 0.1);
   border: 1px solid rgba(255, 140, 0, 0.3);
-  border-radius: 4px;
+  box-shadow: none;
 }
 
 .robogoose-btn {
-  background: transparent;
-  color: #FF8C00;
+  background: #FF8C00;
+  color: #000;
   border: 1px solid #FF8C00;
-  box-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
   margin-top: 16px;
   border-radius: 4px;
   text-transform: uppercase;
   font-weight: bold;
 }
 
+[data-theme="dark"] .robogoose-btn {
+  background: transparent;
+  color: #FF8C00;
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
+}
+
 .robogoose-btn:hover {
-  background: #FF8C00;
-  color: #1A1A1A;
+  background: #ff9d26;
+  color: #000;
   transform: translateY(-2px) scale(1.05) skew(-5deg);
   box-shadow: 0 0 20px rgba(255, 140, 0, 0.6);
+}
+
+[data-theme="dark"] .robogoose-btn:hover {
+  background: #FF8C00;
+  color: #1A1A1A;
 }
 
 .robogoose-content {
@@ -220,12 +239,28 @@
 .robogoose-lore {
   padding: 32px;
   position: relative;
-  border-left: 2px solid #FF8C00;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #FF8C00;
   background: rgba(255, 255, 255, 0.7);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s;
+  border-radius: 4px;
 }
 
 [data-theme="dark"] .robogoose-lore {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid #333;
+  border-left: 4px solid #FF8C00;
+}
+
+.robogoose-lore:hover {
+  transform: translateY(-8px) scale(1.02) skew(-1deg);
+  border-color: #FF0000;
+  border-left-color: #FF0000;
+  box-shadow: -8px 8px 30px rgba(255, 0, 0, 0.3);
+}
+
+.robogoose-lore:hover h3 {
+  color: #FF0000;
 }
 
 .robogoose-lore h3 {
@@ -258,13 +293,24 @@
 
 .env-tag {
   background: rgba(255, 140, 0, 0.1);
-  border: 1px dashed rgba(255, 140, 0, 0.4);
+  border: 1px solid rgba(255, 140, 0, 0.3);
   padding: 6px 16px;
-  border-radius: 0;
-  font-size: 0.85rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
   color: #FF8C00;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  font-family: var(--font-mono);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: default;
+}
+
+.env-tag:hover {
+  transform: scale(1.1) skew(-2deg);
+  border-color: #FF0000;
+  color: #FF0000;
+  background: rgba(255, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
 }
 
 .robogoose-mechanics h3 {
@@ -289,7 +335,8 @@
   padding: 20px;
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, border-color 0.2s;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s;
+  border-radius: 4px;
 }
 
 [data-theme="dark"] .mechanic-card {
@@ -298,14 +345,19 @@
 }
 
 .mechanic-card:hover {
-  transform: translateY(-4px) skew(-2deg);
+  transform: translateY(-8px) scale(1.05) skew(-2deg);
   border-color: #FF0000;
-  box-shadow: -4px 4px 0 rgba(255, 0, 0, 0.4);
+  box-shadow: -8px 8px 20px rgba(255, 0, 0, 0.4);
 }
 
 .mechanic-icon {
   color: #FF8C00;
   margin-bottom: 12px;
+  transition: color 0.3s ease;
+}
+
+.mechanic-card:hover .mechanic-icon {
+  color: #FF0000;
 }
 
 .mechanic-card h4 {

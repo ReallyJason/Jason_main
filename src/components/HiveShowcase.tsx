@@ -47,7 +47,7 @@ const HiveShowcase: React.FC = () => {
         >
           <div className="hive-header-text">
             <div className="hive-badge">
-              <Hexagon size={16} fill="#FFB800" /> Featured Project
+              <Hexagon size={16} fill="#E59524" /> Featured Project
             </div>
             <h2 className="section-title" style={{ color: 'var(--text-primary)', fontFamily: "'Montserrat', sans-serif", fontWeight: 800 }}>HiveFive</h2>
             <p className="section-subtitle">

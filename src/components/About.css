@@ -1,7 +1,41 @@
 .about-section {
   position: relative;
-  background-color: var(--bg-secondary);
+  /* Let the global background through, but add section-specific depth */
+  background-color: transparent;
   overflow: hidden;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mesh-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Blueprint Grid Overlay */
+.about-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(var(--border-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Soft Radial "Spotlight" Gradient */
+.about-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 242, 255, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .about-grid {
@@ -9,6 +43,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .about-text {
@@ -34,6 +70,9 @@
   font-size: 1.25rem;
   margin-bottom: 16px;
   color: var(--text-primary);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .tech-stack-grid {
@@ -44,12 +83,23 @@
 
 .tech-category {
   padding: 20px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Enhanced Glassmorphism */
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+[data-theme="dark"] .tech-category {
+  background: rgba(30, 30, 30, 0.4);
 }
 
 .tech-category:hover {
-  transform: translateX(4px);
-  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateX(8px);
+  border-color: var(--accent);
+  background: rgba(0, 242, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .tech-category h4 {
@@ -57,7 +107,12 @@
   color: var(--text-secondary);
   margin-bottom: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+}
+
+.tech-category:hover h4 {
+  color: var(--accent);
 }
 
 .tech-items {
@@ -69,17 +124,34 @@
 .tech-item-badge {
   font-size: 0.8rem;
   padding: 6px 12px;
-  background: rgba(59, 130, 246, 0.1);
-  color: #1e3a8a;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  border-radius: 6px;
-  font-weight: 600;
+  background: rgba(59, 130, 246, 0.08);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 [data-theme="dark"] .tech-item-badge {
-  color: #dbeafe;
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: rgba(0, 242, 255, 0.03);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   font-weight: 500;
+}
+
+.tech-item-badge:hover {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  color: var(--accent);
+}
+
+[data-theme="dark"] .tech-item-badge:hover {
+  background: rgba(0, 242, 255, 0.1);
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
 }
 
 .about-visual {

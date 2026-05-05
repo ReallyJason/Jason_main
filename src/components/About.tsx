@@ -11,9 +11,20 @@ const About: React.FC = () => {
 
   return (
     <section id="about" className="section about-section">
-      <div className="glow-blob glow-purple"></div>
+      <motion.div 
+        className="mesh-gradient"
+        animate={{
+          background: [
+            "radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 50%)",
+            "radial-gradient(circle at 80% 80%, rgba(188, 19, 254, 0.05) 0%, transparent 50%)",
+            "radial-gradient(circle at 20% 80%, rgba(0, 242, 255, 0.05) 0%, transparent 50%)",
+            "radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 50%)"
+          ]
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      />
       <div className="container">
-        <motion.div 
+        <motion.div
           className="about-grid"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,17 +35,19 @@ const About: React.FC = () => {
             <h2 className="section-title">About Me</h2>
             <div className="about-text">
               <p>
-                I'm a computer science student, builder, and aspiring software engineer with a deep passion for 
-                crafting elegant solutions to complex problems. 
+                I'm a computer science student, builder, and aspiring software engineer with a deep passion for
+                crafting elegant solutions to complex problems.
               </p>
               <p>
-                My journey in tech is driven by the desire to build products that matter. Whether it's 
-                engineering a high-performance backend, designing a pixel-perfect frontend, or experimenting 
+                My journey in tech is driven by the desire to build products that matter. Whether it's
+                engineering a high-performance backend, designing a pixel-perfect frontend, or experimenting
                 with game physics in C++, I thrive at the intersection of logic and creativity.
               </p>
               <p>
-                Currently, I'm focused on growing <strong>HiveFive</strong>, a creator-centric marketplace, while 
-                continuously expanding my skill set in scalable architectures and interactive media.
+                I pride myself on being an open-minded and collaborative developer.
+                I enjoy bridging the gap between complex technical logic and great user experiences.
+                I'm currently looking for a dynamic team where I can contribute my skills in full-stack and
+                game development to build something impactful.
               </p>
             </div>
           </div>

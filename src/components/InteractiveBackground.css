@@ -1,0 +1,15 @@
+.interactive-bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; /* Stay behind everything, including blobs */
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+[data-theme="light"] .interactive-bg-canvas {
+  opacity: 0.15;
+  filter: brightness(0.5);
+}

@@ -35,21 +35,22 @@
   max-width: 380px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border: 4px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-color);
   background-color: var(--bg-card);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 [data-theme="dark"] .hero-profile-pic {
-  border: 4px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
 }
 
 .hero-profile-pic:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0, 242, 255, 0.3);
+  border-color: var(--accent-secondary);
 }
 
 .hero-badge {
@@ -57,18 +58,21 @@
   align-items: center;
   gap: 8px;
   padding: 6px 16px;
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-  font-size: 0.875rem;
-  color: var(--text-secondary);
+  background: rgba(0, 242, 255, 0.05);
+  border: 1px solid rgba(0, 242, 255, 0.2);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--accent);
   margin-bottom: 24px;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 [data-theme="dark"] .hero-badge {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 242, 255, 0.05);
+  border: 1px solid rgba(0, 242, 255, 0.2);
 }
 
 .pulse-dot {
@@ -87,11 +91,13 @@
 }
 
 .hero-title {
-  font-size: 4rem;
-  font-weight: 800;
+  font-size: 3rem;
+  font-weight: 900;
   line-height: 1.1;
   margin-bottom: 24px;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  padding: 0.1em 0.1em 0.1em 0; /* Extra breathing room for glyphs */
 }
 
 .hero-subtitle {
