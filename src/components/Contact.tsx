@@ -56,7 +56,7 @@ const Contact: React.FC = () => {
                 <h3 className="card-title">Current Status</h3>
               </div>
               <p className="status-text">
-                I'm currently focused on growing <strong>Hive</strong>, but I'm always open to discussing new software opportunities, potential collaborations, or just grabbing a virtual coffee to talk about tech.
+                I'm currently focused on growing <strong>HiveFive</strong>, but I'm always open to discussing new software opportunities, potential collaborations, or just grabbing a virtual coffee to talk about tech.
               </p>
               
               <div className="action-buttons">
@@ -76,7 +76,7 @@ const Contact: React.FC = () => {
                 <Globe size={24} className="globe-icon" />
                 <div>
                   <h3 className="card-title">Base of Operations</h3>
-                  <p className="timezone-text">Working dynamically. Available globally.</p>
+                  <p className="timezone-text">Based in NYC, but available to work anywhere.</p>
                 </div>
               </div>
             </div>

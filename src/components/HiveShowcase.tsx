@@ -45,16 +45,22 @@ const HiveShowcase: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="hive-badge">
-            <Hexagon size={16} fill="#f59e0b" /> Featured Project
+          <div className="hive-header-text">
+            <div className="hive-badge">
+              <Hexagon size={16} fill="#FFB800" /> Featured Project
+            </div>
+            <h2 className="section-title" style={{ color: 'var(--text-primary)', fontFamily: "'Montserrat', sans-serif", fontWeight: 800 }}>HiveFive</h2>
+            <p className="section-subtitle">
+              A next-generation marketplace platform. Like Fiverr, but built specifically to be more creator-friendly with significantly lower service fees.
+            </p>
+            <a href="http://hive.jasonhusoftware.com" target="_blank" rel="noopener noreferrer" className="btn hive-btn hive-link">
+              Visit the Hive <ExternalLink className="btn-icon" size={18} />
+            </a>
           </div>
-          <h2 className="section-title" style={{ color: '#fff' }}>Hive</h2>
-          <p className="section-subtitle">
-            A next-generation marketplace platform. Like Fiverr, but built specifically to be more creator-friendly with significantly lower service fees.
-          </p>
-          <a href="http://hive.jasonhusoftware.com" target="_blank" rel="noopener noreferrer" className="btn hive-btn hive-link">
-            Visit hive.jasonhusoftware.com <ExternalLink className="btn-icon" size={18} />
-          </a>
+          
+          <div className="hive-mascot-container">
+            <img src="/HiveFiveLogo.png" alt="HiveFive Logo" className="hive-mascot" />
+          </div>
         </motion.div>
 
         <div className="hive-grid">

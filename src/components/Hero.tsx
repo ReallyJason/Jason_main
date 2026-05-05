@@ -8,15 +8,15 @@ const Hero: React.FC = () => {
   return (
     <section className="hero-section">
       <div className="glow-blob glow-blue"></div>
-      
+
       <div className="container hero-container">
-        <motion.div 
+        <motion.div
           className="hero-content"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <motion.div 
+          <motion.div
             className="hero-badge"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -28,12 +28,14 @@ const Hero: React.FC = () => {
 
           <h1 className="hero-title">
             Hi, I'm <span className="text-gradient-accent">Jason Hu</span>.<br />
-            <span className="text-gradient">Software Developer & Entrepreneur.</span>
+            <span className="text-gradient">Software Developer.</span>
           </h1>
-          
+
           <p className="hero-subtitle">
-            I build sleek, scalable web applications, modern platforms, and engaging games. 
-            Passionate about bringing innovative ideas to life through code.
+            I have a passion for turning complex ideas into reality.
+            Whether I'm architecting modern web platforms or engineering engaging game mechanics,
+            I bring an easygoing, solution-oriented mindset to the table.
+            I love building tools that work well and games that people love to play.
           </p>
 
           <div className="hero-actions">
@@ -56,6 +58,15 @@ const Hero: React.FC = () => {
               <Mail size={24} />
             </a>
           </div>
+        </motion.div>
+
+        <motion.div
+          className="hero-image-container"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+        >
+          <img src="/Jason.png" alt="Jason Hu" className="hero-profile-pic" />
         </motion.div>
       </div>
     </section>

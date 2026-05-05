@@ -1,39 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
 .robogoose-section {
   position: relative;
-  background-color: var(--bg-primary);
-  border-top: 1px solid var(--border-color);
+  background-color: #e5e7eb;
+  background-image: 
+    linear-gradient(rgba(255, 140, 0, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 140, 0, 0.15) 1px, transparent 1px);
+  background-size: 30px 30px;
+  overflow: hidden;
+  font-family: 'Share Tech Mono', monospace;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .robogoose-section {
+  background-color: #1A1A1A;
+}
+
+.robogoose-section::before {
+  content: 'TOP SECRET // RESTRICTED ACCESS';
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  color: rgba(255, 140, 0, 0.05);
+  font-size: 8rem;
+  font-weight: 900;
+  white-space: nowrap;
+  transform: rotate(-10deg);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .robogoose-header {
   margin-bottom: 48px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.robogoose-header-text {
+  flex: 1;
+  max-width: 600px;
+}
+
+.robogoose-logo-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 20px;
+  max-width: 400px;
+}
+
+.robogoose-logo {
+  width: 100%;
+  max-width: 320px;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+  transform: rotate(3deg) translateX(-20px);
+  transition: transform 0.3s ease;
+  background-color: #fdfdfd;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.robogoose-logo:hover {
+  transform: rotate(0deg) scale(1.05) translateX(-20px);
+}
+
+@media (max-width: 768px) {
+  .robogoose-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .robogoose-header-text {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .robogoose-logo-wrapper {
+    justify-content: center;
+    margin-top: 32px;
+  }
+}
+
+/* Glitch Effects */
+.glitch-title {
+  position: relative;
+  color: #111;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: 'Inter', sans-serif;
+  text-shadow: 2px 0 #FF0000, -2px 0 #FF8C00;
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+[data-theme="dark"] .glitch-title {
+  color: #fff;
+}
+
+@keyframes glitch-anim {
+  0% { text-shadow: 2px 0 #FF0000, -2px 0 #FF8C00; transform: skew(0deg); }
+  20% { text-shadow: -2px 0 #FF0000, 2px 0 #FF8C00; transform: skew(-5deg); }
+  21% { text-shadow: 2px 0 #FF0000, -2px 0 #FF8C00; transform: skew(0deg); }
+  40% { text-shadow: 2px 0 #FF0000, -2px 0 #FF8C00; transform: skew(0deg); }
+  41% { text-shadow: -2px 0 #FF0000, 2px 0 #FF8C00; transform: skew(5deg); }
+  42% { text-shadow: 2px 0 #FF0000, -2px 0 #FF8C00; transform: skew(0deg); }
+  60% { text-shadow: 2px 0 #FF0000, -2px 0 #FF8C00; }
+  80% { text-shadow: 3px -1px #FF0000, -3px 1px #FF8C00; }
+  100% { text-shadow: 2px 0 #FF0000, -2px 0 #FF8C00; }
 }
 
 .robogoose-badge {
   display: inline-block;
-  color: #ef4444;
-  font-weight: 600;
+  color: #FF8C00;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.875rem;
   margin-bottom: 16px;
   padding: 6px 16px;
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  border-radius: 20px;
+  background: rgba(255, 140, 0, 0.1);
+  border: 1px solid rgba(255, 140, 0, 0.3);
+  border-radius: 4px;
 }
 
 .robogoose-btn {
-  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-  color: #fff;
-  border: none;
-  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+  background: transparent;
+  color: #FF8C00;
+  border: 1px solid #FF8C00;
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
   margin-top: 16px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .robogoose-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
-  color: #fff;
+  background: #FF8C00;
+  color: #1A1A1A;
+  transform: translateY(-2px) scale(1.05) skew(-5deg);
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.6);
 }
 
 .robogoose-content {
@@ -46,15 +158,19 @@
 .robogoose-images {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
+
+.image-tilt-left { transform: rotate(-3deg); }
+.image-tilt-right { transform: rotate(2deg); margin-left: 20px; }
 
 .robogoose-image-wrapper {
   position: relative;
-  border-radius: 12px;
+  border-radius: 2px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.15);
+  border: 1px solid #FF0000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .robogoose-img {
@@ -62,11 +178,27 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s;
+  filter: contrast(1.2) saturate(0.8) sepia(0.3) hue-rotate(-15deg);
+}
+
+.robogoose-image-wrapper:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.4);
+  z-index: 10;
 }
 
 .robogoose-image-wrapper:hover .robogoose-img {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  filter: contrast(1.3) saturate(1);
+}
+
+.noise-overlay {
+  background: 
+    url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.15"/%3E%3C/svg%3E'),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px);
+  mix-blend-mode: overlay;
+  opacity: 0.7;
 }
 
 .image-overlay {
@@ -87,19 +219,35 @@
 
 .robogoose-lore {
   padding: 32px;
-  border-left: 4px solid #ef4444;
+  position: relative;
+  border-left: 2px solid #FF8C00;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .robogoose-lore {
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .robogoose-lore h3 {
   font-size: 1.5rem;
-  color: #fff;
+  color: #111;
   margin-bottom: 16px;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .robogoose-lore h3 {
+  color: #fff;
 }
 
 .robogoose-lore p {
-  color: var(--text-secondary);
+  color: #4b5563;
   line-height: 1.6;
   margin-bottom: 24px;
+}
+
+[data-theme="dark"] .robogoose-lore p {
+  color: #A0A0A0;
 }
 
 .environments {
@@ -109,19 +257,26 @@
 }
 
 .env-tag {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 140, 0, 0.1);
+  border: 1px dashed rgba(255, 140, 0, 0.4);
   padding: 6px 16px;
-  border-radius: 20px;
+  border-radius: 0;
   font-size: 0.85rem;
-  color: #d4d4d4;
+  color: #FF8C00;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .robogoose-mechanics h3 {
   font-size: 1.5rem;
-  color: #fff;
+  color: #111;
   margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .robogoose-mechanics h3 {
+  color: #fff;
 }
 
 .mechanic-grid {
@@ -132,29 +287,47 @@
 
 .mechanic-card {
   padding: 20px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, border-color 0.2s;
+}
+
+[data-theme="dark"] .mechanic-card {
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid #333;
 }
 
 .mechanic-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(239, 68, 68, 0.4);
+  transform: translateY(-4px) skew(-2deg);
+  border-color: #FF0000;
+  box-shadow: -4px 4px 0 rgba(255, 0, 0, 0.4);
 }
 
 .mechanic-icon {
-  color: #ef4444;
+  color: #FF8C00;
   margin-bottom: 12px;
 }
 
 .mechanic-card h4 {
   font-size: 1.1rem;
-  color: #fff;
+  color: #111;
   margin-bottom: 8px;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .mechanic-card h4 {
+  color: #fff;
 }
 
 .mechanic-card p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-size: 0.85rem;
+  color: #4b5563;
   line-height: 1.5;
+}
+
+[data-theme="dark"] .mechanic-card p {
+  color: #A0A0A0;
 }
 
 @media (max-width: 968px) {

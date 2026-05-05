@@ -21,7 +21,7 @@
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 16px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .contact-desc {
@@ -41,7 +41,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  color: #e5e5e5;
+  color: var(--text-secondary);
   font-weight: 500;
   transition: transform 0.2s ease, color 0.2s ease;
 }
@@ -57,10 +57,15 @@ a.contact-link:hover {
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   color: #3b82f6;
+}
+
+[data-theme="dark"] .icon-wrapper {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .contact-availability {
@@ -73,7 +78,7 @@ a.contact-link:hover {
 
 .availability-card, .timezone-card {
   padding: 32px;
-  background: rgba(20, 20, 20, 0.6);
+  background: var(--bg-card);
 }
 
 .status-header {
@@ -86,7 +91,7 @@ a.contact-link:hover {
 .card-title {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .green-pulse {
@@ -113,7 +118,7 @@ a.contact-link:hover {
 }
 
 .status-text strong {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .action-buttons {

@@ -6,7 +6,7 @@ import './RoboGooseShowcase.css';
 const RoboGooseShowcase: React.FC = () => {
   return (
     <section id="robogoose" className="section robogoose-section">
-      <div className="container">
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div 
           className="robogoose-header"
           initial={{ opacity: 0, y: 20 }}
@@ -14,14 +14,20 @@ const RoboGooseShowcase: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="robogoose-badge">Game Dev Project</div>
-          <h2 className="section-title">RoboGoose</h2>
-          <p className="section-subtitle">
-            An action-oriented, third-person physics-sandbox where you play as a cybernetically enhanced terminator goose.
-          </p>
-          <a href="https://reallyjason.itch.io/robogoose" target="_blank" rel="noopener noreferrer" className="btn robogoose-btn">
-            Play on Itch.io <ExternalLink className="btn-icon" size={18} />
-          </a>
+          <div className="robogoose-header-text">
+            <div className="robogoose-badge glitch-badge" data-text="Game Dev Project">Game Dev Project</div>
+            <h2 className="section-title glitch-title" data-text="RoboGoose">RoboGoose</h2>
+            <p className="section-subtitle">
+              An action-oriented, third-person physics-sandbox where you play as a cybernetically enhanced terminator goose.
+            </p>
+            <a href="https://reallyjason.itch.io/robogoose" target="_blank" rel="noopener noreferrer" className="btn robogoose-btn">
+              Play on Itch.io <ExternalLink className="btn-icon" size={18} />
+            </a>
+          </div>
+          
+          <div className="robogoose-logo-wrapper">
+            <img src="/RoboGoose_Logo.png" alt="RoboGoose Wanted Poster" className="robogoose-logo" />
+          </div>
         </motion.div>
 
         <div className="robogoose-content">
@@ -32,13 +38,13 @@ const RoboGooseShowcase: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="robogoose-image-wrapper primary-image">
+            <div className="robogoose-image-wrapper primary-image image-tilt-left">
               <img src="/RoboGoose1.png" alt="RoboGoose Gameplay 1" className="robogoose-img" />
-              <div className="image-overlay"></div>
+              <div className="image-overlay noise-overlay"></div>
             </div>
-            <div className="robogoose-image-wrapper secondary-image">
+            <div className="robogoose-image-wrapper secondary-image image-tilt-right">
               <img src="/RoboGoose2.png" alt="RoboGoose Gameplay 2" className="robogoose-img" />
-              <div className="image-overlay"></div>
+              <div className="image-overlay noise-overlay"></div>
             </div>
           </motion.div>
 

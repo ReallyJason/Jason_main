@@ -33,11 +33,13 @@ const About: React.FC = () => {
                 with game physics in C++, I thrive at the intersection of logic and creativity.
               </p>
               <p>
-                Currently, I'm focused on growing <strong>Hive</strong>, a creator-centric marketplace, while 
+                Currently, I'm focused on growing <strong>HiveFive</strong>, a creator-centric marketplace, while 
                 continuously expanding my skill set in scalable architectures and interactive media.
               </p>
             </div>
+          </div>
 
+          <div className="about-visual">
             <div className="tech-stack-container">
               <h3 className="tech-stack-title">Technical Arsenal</h3>
               <div className="tech-stack-grid">
@@ -51,33 +53,6 @@ const About: React.FC = () => {
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="about-visual">
-            <div className="visual-card glass">
-              <div className="visual-header">
-                <div className="dot red"></div>
-                <div className="dot yellow"></div>
-                <div className="dot green"></div>
-              </div>
-              <div className="visual-body">
-                <pre>
-                  <code>
-                    <span className="code-keyword">const</span> <span className="code-var">developer</span> = {'{'}
-                    <br />
-                    {'  '}name: <span className="code-string">"Jason Hu"</span>,
-                    <br />
-                    {'  '}role: <span className="code-string">"Software Engineer"</span>,
-                    <br />
-                    {'  '}passions: [<span className="code-string">"Web Apps"</span>, <span className="code-string">"Game Dev"</span>],
-                    <br />
-                    {'  '}status: <span className="code-string">"Building the future"</span>
-                    <br />
-                    {'}'};
-                  </code>
-                </pre>
               </div>
             </div>
           </div>
