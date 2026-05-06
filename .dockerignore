@@ -6,4 +6,3 @@ dist
 Dockerfile
 docker-compose.yml
 .eslint.config.js
-tsconfig*.json
