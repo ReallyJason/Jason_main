@@ -15,7 +15,9 @@ const InteractiveBackground: React.FC = () => {
     let particles: Particle[] = [];
     const particleCount = 60;
     const connectionDistance = 150;
+    const connectionDistanceSq = connectionDistance * connectionDistance;
     const mouse = { x: -100, y: -100, radius: 150 };
+    const mouseRadiusSq = mouse.radius * mouse.radius;
 
     class Particle {
       x: number;
@@ -45,16 +47,18 @@ const InteractiveBackground: React.FC = () => {
         // Interaction with mouse
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < mouse.radius) {
+        const distanceSq = dx * dx + dy * dy;
+        if (distanceSq < mouseRadiusSq) {
+          const distance = Math.sqrt(distanceSq);
           const force = (mouse.radius - distance) / mouse.radius;
           this.vx -= dx * force * 0.02;
           this.vy -= dy * force * 0.02;
         }
 
         // Limit speed
-        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-        if (speed > 2) {
+        const speedSq = this.vx * this.vx + this.vy * this.vy;
+        if (speedSq > 4) { // 2^2
+          const speed = Math.sqrt(speedSq);
           this.vx = (this.vx / speed) * 2;
           this.vy = (this.vy / speed) * 2;
         }
@@ -66,10 +70,7 @@ const InteractiveBackground: React.FC = () => {
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
         ctx.fill();
-        
-        // Add glow
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = this.color;
+        // Remove shadowBlur from here as it's very expensive in a loop
       }
     }
 
@@ -80,10 +81,14 @@ const InteractiveBackground: React.FC = () => {
       }
     };
 
+    let resizeTimeout: number;
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
+      if (resizeTimeout) window.clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+      }, 200);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -104,9 +109,10 @@ const InteractiveBackground: React.FC = () => {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const distanceSq = dx * dx + dy * dy;
 
-          if (distance < connectionDistance) {
+          if (distanceSq < connectionDistanceSq) {
+            const distance = Math.sqrt(distanceSq);
             ctx.beginPath();
             ctx.strokeStyle = particles[i].color === particles[j].color 
               ? `${particles[i].color}${Math.floor((1 - distance/connectionDistance) * 40).toString(16).padStart(2, '0')}`

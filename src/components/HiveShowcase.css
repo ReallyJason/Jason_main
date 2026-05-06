@@ -63,6 +63,7 @@
   .hive-mascot-container {
     justify-content: center;
     margin-top: 32px;
+    margin-left: 0;
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, Mail, Briefcase, User, Zap } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import './Hero.css';
 
@@ -39,15 +39,15 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="hero-actions">
-            <a href="#hive" className="btn btn-primary">
-              View Featured Project <ArrowRight className="btn-icon" size={20} />
-            </a>
             <a href="#about" className="btn btn-primary">
-              About Me <ArrowRight className="btn-icon" size={20} />
+              <User className="btn-icon-left" size={20} /> About Me <ArrowRight className="btn-icon" size={20} />
             </a>
-            {/* <a href="#projects" className="btn btn-secondary">
-              Explore Work
-            </a> */}
+            <a href="#experience" className="btn btn-primary">
+              <Briefcase className="btn-icon-left" size={20} /> Work Experience <ArrowRight className="btn-icon" size={20} />
+            </a>
+            <a href="#hive" className="btn btn-primary">
+              <Zap className="btn-icon-left" size={20} /> Featured Project <ArrowRight className="btn-icon" size={20} />
+            </a>
           </div>
 
           <div className="hero-socials">

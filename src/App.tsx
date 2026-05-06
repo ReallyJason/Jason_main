@@ -1,4 +1,5 @@
 import Hero from './components/Hero';
+import Experience from './components/Experience';
 import HiveShowcase from './components/HiveShowcase';
 import RoboGooseShowcase from './components/RoboGooseShowcase';
 import About from './components/About';
@@ -17,6 +18,7 @@ function App() {
       <main>
         <Hero />
         <About />
+        <Experience />
         <HiveShowcase />
         <RoboGooseShowcase />
         {/* <Projects /> */}

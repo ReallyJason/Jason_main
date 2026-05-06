@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './CursorLight.css';
 
 const CursorLight: React.FC = () => {
-  const [position, setPosition] = useState({ x: -100, y: -100 });
+  const cursorRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -14,8 +14,9 @@ const CursorLight: React.FC = () => {
     window.addEventListener('resize', checkMobile);
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isMobile) {
-        setPosition({ x: e.clientX, y: e.clientY });
+      if (!isMobile && cursorRef.current) {
+        // Use transform for better performance than top/left
+        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
       }
     };
 
@@ -31,10 +32,15 @@ const CursorLight: React.FC = () => {
 
   return (
     <div 
+      ref={cursorRef}
       className="cursor-light"
       style={{ 
-        left: `${position.x}px`, 
-        top: `${position.y}px` 
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        pointerEvents: 'none',
+        zIndex: 9999,
+        willChange: 'transform'
       }}
     />
   );
