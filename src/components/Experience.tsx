@@ -39,10 +39,10 @@ const Experience: React.FC = () => {
         docs: ["Chain of Custody (CoC)", "Daily Field Reports", "Technical Logbooks"]
       },
       images: [
-        { src: "/experience/Setting_up_pumps.jpg", alt: "Setting up high-volume air pumps" },
-        { src: "/experience/More_pumps.jpg", alt: "Air sampling station array" },
-        { src: "/experience/work_area.jpg", alt: "Environmental monitoring work area" },
-        { src: "/experience/Chain_of_Custody.jpg", alt: "Documentation and Chain of Custody" }
+        { src: "/experience/Setting_up_pumps.webp", alt: "Setting up high-volume air pumps" },
+        { src: "/experience/More_pumps.webp", alt: "Air sampling station array" },
+        { src: "/experience/work_area.webp", alt: "Environmental monitoring work area" },
+        { src: "/experience/Chain_of_Custody.webp", alt: "Documentation and Chain of Custody" }
       ]
     }
   ];

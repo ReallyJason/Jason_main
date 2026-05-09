@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Play, X, Hexagon } from 'lucide-react';
+import { playBuzz, playBlip } from '../utils/audio';
 import './HiveShowcase.css';
 
 const HiveShowcase: React.FC = () => {
@@ -59,7 +60,7 @@ const HiveShowcase: React.FC = () => {
           </div>
           
           <div className="hive-mascot-container">
-            <img src="/HiveFiveLogo.png" alt="HiveFive Logo" className="hive-mascot" />
+            <img src="/HiveFiveLogo.webp" alt="HiveFive Logo" className="hive-mascot" />
           </div>
         </motion.div>
 

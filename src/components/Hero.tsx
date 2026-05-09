@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
-          <img src="/Jason.png" alt="Jason Hu" className="hero-profile-pic" />
+          <img src="/Jason.webp" alt="Jason Hu" className="hero-profile-pic" />
         </motion.div>
       </div>
     </section>

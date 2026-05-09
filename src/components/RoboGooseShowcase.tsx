@@ -1,9 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Crosshair, Zap, Wind, Map } from 'lucide-react';
+import { ExternalLink, Crosshair, Zap, Wind, Map, Gamepad2 } from 'lucide-react';
+import { playQuack } from '../utils/audio';
 import './RoboGooseShowcase.css';
 
 const RoboGooseShowcase: React.FC = () => {
+  const handleQuack = () => {
+    playQuack();
+  };
+
   return (
     <section id="robogoose" className="section robogoose-section">
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
@@ -15,7 +20,9 @@ const RoboGooseShowcase: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="robogoose-header-text">
-            <div className="robogoose-badge glitch-badge" data-text="Game Dev Project">Game Dev Project</div>
+            <div className="robogoose-badge glitch-badge" data-text="Game Dev Project">
+              <Gamepad2 size={16} className="badge-icon" /> Game Dev Project
+            </div>
             <h2 className="section-title glitch-title" data-text="RoboGoose">RoboGoose</h2>
             <p className="section-subtitle">
               An action-oriented, third-person physics-sandbox where you play as a cybernetically enhanced terminator goose.
@@ -25,8 +32,8 @@ const RoboGooseShowcase: React.FC = () => {
             </a>
           </div>
           
-          <div className="robogoose-logo-wrapper">
-            <img src="/RoboGoose_Logo.png" alt="RoboGoose Wanted Poster" className="robogoose-logo" />
+          <div className="robogoose-logo-wrapper" onMouseEnter={handleQuack}>
+            <img src="/RoboGoose_Logo.webp" alt="RoboGoose Wanted Poster" className="robogoose-logo" />
           </div>
         </motion.div>
 
@@ -39,11 +46,11 @@ const RoboGooseShowcase: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="robogoose-image-wrapper primary-image image-tilt-left">
-              <img src="/RoboGoose1.png" alt="RoboGoose Gameplay 1" className="robogoose-img" />
+              <img src="/RoboGoose1.webp" alt="RoboGoose Gameplay 1" className="robogoose-img" loading="lazy" />
               <div className="image-overlay noise-overlay"></div>
             </div>
             <div className="robogoose-image-wrapper secondary-image image-tilt-right">
-              <img src="/RoboGoose2.png" alt="RoboGoose Gameplay 2" className="robogoose-img" />
+              <img src="/RoboGoose2.webp" alt="RoboGoose Gameplay 2" className="robogoose-img" loading="lazy" />
               <div className="image-overlay noise-overlay"></div>
             </div>
           </motion.div>

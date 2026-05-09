@@ -1,31 +1,40 @@
+import { Suspense, lazy, useState } from 'react';
 import Hero from './components/Hero';
-import Experience from './components/Experience';
-import HiveShowcase from './components/HiveShowcase';
-import RoboGooseShowcase from './components/RoboGooseShowcase';
-import About from './components/About';
-// import Projects from './components/Projects';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
 import InteractiveBackground from './components/InteractiveBackground';
 import CursorLight from './components/CursorLight';
+import Footer from './components/Footer';
+import NavButton from './components/NavButton';
+import CommandPalette from './components/CommandPalette';
+
+// Lazy load components that are not immediately visible
+const About = lazy(() => import('./components/About'));
+const Experience = lazy(() => import('./components/Experience'));
+const HiveShowcase = lazy(() => import('./components/HiveShowcase'));
+const RoboGooseShowcase = lazy(() => import('./components/RoboGooseShowcase'));
+const Contact = lazy(() => import('./components/Contact'));
 
 function App() {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   return (
     <div className="app-container">
       <InteractiveBackground />
       <CursorLight />
+      <CommandPalette isExternalOpen={isNavOpen} onClose={() => setIsNavOpen(false)} />
       <main>
         <Hero />
-        <About />
-        <Experience />
-        <HiveShowcase />
-        <RoboGooseShowcase />
-        {/* <Projects /> */}
-        <Contact />
+        <Suspense fallback={<div className="section-loader" />}>
+          <About />
+          <Experience />
+          <HiveShowcase />
+          <RoboGooseShowcase />
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
       <ThemeToggle />
+      <NavButton onClick={() => setIsNavOpen(true)} isOpen={isNavOpen} />
     </div>
   );
 }
