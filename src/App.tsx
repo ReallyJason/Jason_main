@@ -24,11 +24,14 @@ function App() {
       <CommandPalette isExternalOpen={isNavOpen} onClose={() => setIsNavOpen(false)} />
       <main>
         <Hero />
+        <div className="section-divider" />
         <Suspense fallback={<div className="section-loader" />}>
           <About />
+          <div className="section-divider" />
           <Experience />
           <HiveShowcase />
           <RoboGooseShowcase />
+          <div className="section-divider" />
           <Contact />
         </Suspense>
       </main>

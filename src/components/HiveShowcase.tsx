@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Play, X, Hexagon } from 'lucide-react';
-import { playBuzz, playBlip } from '../utils/audio';
+import MagneticButton from './MagneticButton';
 import './HiveShowcase.css';
 
 const HiveShowcase: React.FC = () => {
@@ -54,9 +54,11 @@ const HiveShowcase: React.FC = () => {
             <p className="section-subtitle">
               A next-generation marketplace platform. Like Fiverr, but built specifically to be more creator-friendly with significantly lower service fees.
             </p>
-            <a href="http://hive.jasonhusoftware.com" target="_blank" rel="noopener noreferrer" className="btn hive-btn hive-link">
-              Visit the Hive <ExternalLink className="btn-icon" size={18} />
-            </a>
+            <MagneticButton>
+              <a href="http://hive.jasonhusoftware.com" target="_blank" rel="noopener noreferrer" className="btn hive-btn hive-link">
+                Visit the Hive <ExternalLink className="btn-icon" size={18} />
+              </a>
+            </MagneticButton>
           </div>
           
           <div className="hive-mascot-container">

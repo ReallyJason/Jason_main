@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail, Briefcase, User, Zap } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import MagneticButton from './MagneticButton';
 import './Hero.css';
 
 const Hero: React.FC = () => {
@@ -39,27 +40,44 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="hero-actions">
-            <a href="#about" className="btn btn-primary">
-              <User className="btn-icon-left" size={20} /> About Me <ArrowRight className="btn-icon" size={20} />
-            </a>
-            <a href="#experience" className="btn btn-primary">
-              <Briefcase className="btn-icon-left" size={20} /> Work Experience <ArrowRight className="btn-icon" size={20} />
-            </a>
-            <a href="#hive" className="btn btn-primary">
-              <Zap className="btn-icon-left" size={20} /> Featured Project <ArrowRight className="btn-icon" size={20} />
-            </a>
+            <div className="hero-main-actions">
+              <MagneticButton>
+                <a href="#about" className="btn btn-primary">
+                  <User className="btn-icon-left" size={20} /> About Me <ArrowRight className="btn-icon" size={20} />
+                </a>
+              </MagneticButton>
+              <MagneticButton>
+                <a href="#experience" className="btn btn-primary">
+                  <Briefcase className="btn-icon-left" size={20} /> Work Experience <ArrowRight className="btn-icon" size={20} />
+                </a>
+              </MagneticButton>
+            </div>
+            
+            <div className="hero-secondary-actions">
+              <MagneticButton>
+                <a href="#hive" className="btn btn-primary">
+                  <Zap className="btn-icon-left" size={20} /> Featured Project <ArrowRight className="btn-icon" size={20} />
+                </a>
+              </MagneticButton>
+            </div>
           </div>
 
           <div className="hero-socials">
-            <a href="https://github.com/ReallyJason" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <FaGithub size={24} />
-            </a>
-            <a href="https://www.linkedin.com/in/jason-hu12" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <FaLinkedin size={24} />
-            </a>
-            <a href="mailto:jhu0039@gmail.com" aria-label="Email">
-              <Mail size={24} />
-            </a>
+            <MagneticButton distance={20}>
+              <a href="https://github.com/ReallyJason" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <FaGithub size={24} />
+              </a>
+            </MagneticButton>
+            <MagneticButton distance={20}>
+              <a href="https://www.linkedin.com/in/jason-hu12" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <FaLinkedin size={24} />
+              </a>
+            </MagneticButton>
+            <MagneticButton distance={20}>
+              <a href="mailto:jhu0039@gmail.com" aria-label="Email">
+                <Mail size={24} />
+              </a>
+            </MagneticButton>
           </div>
         </motion.div>
 

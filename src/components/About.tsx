@@ -1,14 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Code2, Terminal, Database, Layout, Box } from 'lucide-react';
 import './About.css';
 
 const About: React.FC = () => {
-  const techStack = [
-    { category: "Languages", items: ["TypeScript", "JavaScript", "C++", "C", "Java", "Python", "OCaml", "HTML/CSS"] },
-    { category: "Frameworks & Libs", items: ["React", "Node.js", "Express", "Vite", "Framer Motion"] },
-    { category: "Tools & DBs", items: ["Git", "SQL", "MongoDB", "PostgreSQL", "Docker", "Figma"] }
-  ];
-
   return (
     <section id="about" className="section about-section">
       <motion.div 
@@ -53,20 +48,93 @@ const About: React.FC = () => {
           </div>
 
           <div className="about-visual">
-            <div className="tech-stack-container">
-              <h3 className="tech-stack-title">Technical Arsenal</h3>
-              <div className="tech-stack-grid">
-                {techStack.map((stack, idx) => (
-                  <div key={idx} className="tech-category glass">
-                    <h4>{stack.category}</h4>
-                    <div className="tech-items">
-                      {stack.items.map((item, i) => (
-                        <span key={i} className="tech-item-badge">{item}</span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="bento-grid">
+              {/* Large Core Tech Card */}
+              <motion.div 
+                className="bento-card bento-large glass"
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="bento-icon-wrapper">
+                  <Code2 className="bento-icon" size={32} />
+                </div>
+                <h3>Core Languages</h3>
+                <div className="bento-tags">
+                  <span className="tech-item-badge">C++</span>
+                  <span className="tech-item-badge">TypeScript</span>
+                  <span className="tech-item-badge">JavaScript</span>
+                  <span className="tech-item-badge">Python</span>
+                  <span className="tech-item-badge">Java</span>
+                </div>
+                <div className="bento-card-glow" />
+              </motion.div>
+
+              {/* Frontend Card */}
+              <motion.div 
+                className="bento-card bento-medium glass"
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="bento-icon-wrapper">
+                  <Layout className="bento-icon" size={24} />
+                </div>
+                <h3>Frontend</h3>
+                <div className="bento-tags">
+                  <span className="tech-item-badge">React</span>
+                  <span className="tech-item-badge">Framer Motion</span>
+                  <span className="tech-item-badge">HTML/CSS</span>
+                </div>
+              </motion.div>
+
+              {/* Backend Card */}
+              <motion.div 
+                className="bento-card bento-small glass"
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="bento-icon-wrapper">
+                  <Database className="bento-icon" size={20} />
+                </div>
+                <h3>Backend</h3>
+                <div className="bento-tags">
+                  <span className="tech-item-badge">Node.js</span>
+                  <span className="tech-item-badge">Express</span>
+                </div>
+              </motion.div>
+
+              {/* Infrastructure Card */}
+              <motion.div 
+                className="bento-card bento-small glass"
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="bento-icon-wrapper">
+                  <Box className="bento-icon" size={20} />
+                </div>
+                <h3>Infrastructure</h3>
+                <div className="bento-tags">
+                  <span className="tech-item-badge">Docker</span>
+                  <span className="tech-item-badge">Git</span>
+                </div>
+              </motion.div>
+
+              {/* Data Card */}
+              <motion.div 
+                className="bento-card bento-medium glass"
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="bento-icon-wrapper">
+                  <Terminal className="bento-icon" size={24} />
+                </div>
+                <h3>Data & Systems</h3>
+                <div className="bento-tags">
+                  <span className="tech-item-badge">SQL</span>
+                  <span className="tech-item-badge">PostgreSQL</span>
+                  <span className="tech-item-badge">MongoDB</span>
+                  <span className="tech-item-badge">Linux</span>
+                </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>
