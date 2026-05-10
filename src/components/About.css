@@ -126,10 +126,19 @@
   transition: all 0.3s ease;
 }
 
+:root[data-theme="light"] .skill-item {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
 .skill-item:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: var(--accent);
   transform: translateX(5px);
+}
+
+:root[data-theme="light"] .skill-item:hover {
+  background: rgba(59, 130, 246, 0.05);
 }
 
 .skill-brand-icon {

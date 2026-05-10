@@ -124,18 +124,20 @@
 }
 
 .robogoose-badge {
-  display: inline-block;
-  background: #2D3E50;
-  color: #E59524;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 140, 0, 0.1);
+  color: #D97706;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.875rem;
   margin-bottom: 16px;
   padding: 6px 16px;
-  border: 1px solid #E59524;
+  border: 1px solid rgba(255, 140, 0, 0.4);
   border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
 }
 
 [data-theme="dark"] .robogoose-badge {
@@ -255,7 +257,7 @@
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-left: 4px solid #FF8C00;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.9);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s;
   border-radius: 4px;
 }
@@ -311,12 +313,16 @@
   padding: 6px 16px;
   border-radius: 4px;
   font-size: 0.8rem;
-  color: #FF8C00;
+  color: #D97706;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-family: var(--font-mono);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: default;
+}
+
+[data-theme="dark"] .env-tag {
+  color: #FF8C00;
 }
 
 .env-tag:hover {
@@ -347,7 +353,7 @@
 
 .mechanic-card {
   padding: 20px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s;
   border-radius: 4px;

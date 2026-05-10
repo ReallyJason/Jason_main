@@ -167,10 +167,18 @@
   transition: all 0.3s ease;
 }
 
+:root[data-theme="light"] .mini-item {
+  background: rgba(0, 0, 0, 0.02);
+}
+
 .mini-item:hover {
   border-color: var(--accent);
   background: rgba(0, 242, 255, 0.05);
   transform: translateX(4px);
+}
+
+:root[data-theme="light"] .mini-item:hover {
+  background: rgba(59, 130, 246, 0.05);
 }
 
 .mini-item span {
