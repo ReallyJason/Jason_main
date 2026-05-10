@@ -1,0 +1,97 @@
+.scroll-progress-container {
+  position: fixed;
+  right: 0; /* Flush with the right edge */
+  top: 0;
+  height: 100vh; /* Full height for the track */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 100;
+  padding-right: 12px; /* Space from the edge for the dots */
+}
+
+@media (max-width: 1024px) {
+  .scroll-progress-container {
+    display: none;
+  }
+}
+
+.scroll-track {
+  width: 4px; /* Thicker bar */
+  height: 100%; /* Full height */
+  background: rgba(255, 255, 255, 0.03);
+  position: absolute;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+}
+
+[data-theme="light"] .scroll-track {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.scroll-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-secondary));
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.section-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-right: 8px; /* Offset from the thick bar */
+}
+
+.section-dot-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+  text-decoration: none;
+  group: hover;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.section-dot-wrapper:hover .section-label,
+.section-dot-wrapper.active .section-label {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--accent);
+}
+
+.section-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--text-secondary);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  opacity: 0.3;
+}
+
+.section-dot-wrapper.active .section-dot {
+  background: var(--accent);
+  opacity: 1;
+  transform: scale(1.5);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.section-dot-wrapper:hover .section-dot {
+  opacity: 1;
+  background: var(--text-primary);
+}

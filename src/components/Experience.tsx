@@ -1,6 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
+import { 
+  Briefcase, 
+  Calendar, 
+  MapPin, 
+  CheckCircle2, 
+  ShieldCheck, 
+  Zap, 
+  ClipboardCheck, 
+  BarChart3, 
+  BookOpen,
+  Wind,
+  Activity,
+  Thermometer,
+  BadgeCheck,
+  ShieldAlert,
+  HeartPulse
+} from 'lucide-react';
 import './Experience.css';
 
 const Experience: React.FC = () => {
@@ -33,11 +49,6 @@ const Experience: React.FC = () => {
           desc: "Executed safety protocols in high-risk zones, including the use of PPE (respirators) and managing site-specific hazards such as electrical grounding for industrial fans."
         }
       ],
-      toolkit: {
-        equipment: ["High-volume air pumps", "Rotameters", "Air scrubbers"],
-        safety: ["Asbestos Handling License", "OSHA Compliance", "Respiratory Protection"],
-        docs: ["Chain of Custody (CoC)", "Daily Field Reports", "Technical Logbooks"]
-      },
       images: [
         { src: "/experience/Setting_up_pumps.webp", alt: "Setting up high-volume air pumps" },
         { src: "/experience/More_pumps.webp", alt: "Air sampling station array" },
@@ -105,24 +116,39 @@ const Experience: React.FC = () => {
                   ))}
                 </div>
 
-                <div className="toolkit-sidebar">
+                <div className="toolkit-sidebar-modern glass border-beam-container">
+                  <div className="border-beam" />
                   <h5 className="details-label"><ShieldCheck size={16} /> Technical Toolkit</h5>
-                  <div className="toolkit-section">
-                    <h6>Equipment</h6>
-                    <div className="toolkit-tags">
-                      {exp.toolkit.equipment.map((t, i) => <span key={i} className="tech-item-badge">{t}</span>)}
+                  
+                  <div className="toolkit-mini-grid">
+                    {/* Equipment Group */}
+                    <div className="mini-group">
+                      <h6>Equipment</h6>
+                      <div className="mini-items">
+                        <div className="mini-item"><Wind size={14} /> <span>Pumps</span></div>
+                        <div className="mini-item"><Activity size={14} /> <span>Rotameters</span></div>
+                        <div className="mini-item"><Thermometer size={14} /> <span>Scrubbers</span></div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="toolkit-section">
-                    <h6>Safety & Compliance</h6>
-                    <div className="toolkit-tags">
-                      {exp.toolkit.safety.map((t, i) => <span key={i} className="tech-item-badge">{t}</span>)}
+
+                    {/* Safety Group */}
+                    <div className="mini-group">
+                      <h6>Safety</h6>
+                      <div className="mini-items">
+                        <div className="mini-item"><BadgeCheck size={14} /> <span>License</span></div>
+                        <div className="mini-item"><ShieldAlert size={14} /> <span>OSHA</span></div>
+                        <div className="mini-item"><HeartPulse size={14} /> <span>PPE</span></div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="toolkit-section">
-                    <h6>Documentation</h6>
-                    <div className="toolkit-tags">
-                      {exp.toolkit.docs.map((t, i) => <span key={i} className="tech-item-badge">{t}</span>)}
+
+                    {/* Documentation Group (Full Width at bottom) */}
+                    <div className="mini-group wide">
+                      <h6>Documentation</h6>
+                      <div className="mini-items docs-row">
+                        <div className="mini-item"><ClipboardCheck size={14} /> <span>CoC Tracking</span></div>
+                        <div className="mini-item"><BarChart3 size={14} /> <span>Field Reports</span></div>
+                        <div className="mini-item"><BookOpen size={14} /> <span>Logbooks</span></div>
+                      </div>
                     </div>
                   </div>
                 </div>

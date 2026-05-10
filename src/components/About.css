@@ -12,7 +12,7 @@
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: start;
 }
@@ -42,112 +42,187 @@
 /* Bento Grid Styles */
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, auto);
-  gap: 16px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 35px 16px;
 }
 
 .bento-card {
   position: relative;
-  padding: 24px;
+  padding: 24px 20px 44px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  min-height: 200px;
 }
 
-.bento-large {
-  grid-column: span 4;
-}
+.bento-large { grid-column: span 6; min-height: 280px; }
+.bento-medium { grid-column: span 2; min-height: 240px; }
+.bento-small { grid-column: span 2; min-height: 200px; }
 
-.bento-medium {
-  grid-column: span 2;
-}
-
-.bento-small {
-  grid-column: span 2;
-}
-
-/* On medium screens, adjust bento */
 @media (max-width: 1200px) {
-  .bento-small {
-    grid-column: span 2;
-  }
+  .bento-grid { grid-template-columns: repeat(4, 1fr); }
+  .bento-medium { grid-column: span 2; }
 }
 
-/* Mobile bento */
-@media (max-width: 640px) {
-  .bento-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .bento-large, .bento-medium, .bento-small {
-    grid-column: span 1;
-  }
+@media (max-width: 768px) {
+  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+  .bento-medium { grid-column: span 2; }
+}
+
+@media (max-width: 480px) {
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-large, .bento-medium, .bento-small { grid-column: span 1; }
+}
+
+.card-metadata {
+  position: absolute;
+  top: 12px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  opacity: 0.4;
+  letter-spacing: 0.1em;
+}
+
+.bento-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .bento-icon-wrapper {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
   color: var(--accent);
 }
 
-.bento-card h3 {
-  font-size: 1.2rem;
+.bento-header h3 {
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.bento-tags {
+/* Premium Skill List (Compact Version) */
+.premium-skill-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent);
+  transform: translateX(5px);
+}
+
+.skill-brand-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Brand Colors */
+.cpp { color: #00599C; }
+.ts { color: #3178C6; }
+.js { color: #F7DF1E; }
+.python { color: #3776AB; }
+.java { color: #007396; }
+.react { color: #61DAFB; }
+.node { color: #339933; }
+.express { color: #ffffff; }
+.html { color: #E34F26; }
+.css { color: #1572B6; }
+.docker { color: #2496ED; }
+.git { color: #F05032; }
+.postgres { color: #4169E1; }
+.mongodb { color: #47A248; }
+.linux { color: #FCC624; }
+
+.skill-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+.skill-usage {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+/* Other Card Styles */
+.skill-pills {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-pill {
+  display: flex;
+  align-items: center;
   gap: 8px;
-}
-
-.tech-item-badge {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  padding: 4px 10px;
-  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  font-size: 0.85rem;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  color: var(--text-secondary);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-.bento-card:hover .tech-item-badge {
+.skill-pill:hover {
   border-color: var(--accent);
-  color: var(--text-primary);
-  background: rgba(0, 242, 255, 0.05);
+  background: rgba(0, 242, 255, 0.1);
 }
 
-.bento-card-glow {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle at center, var(--accent) 0%, transparent 70%);
-  opacity: 0;
-  filter: blur(40px);
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+.skill-pills-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.bento-card:hover .bento-card-glow {
-  opacity: 0.1;
+.pill-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 }
 
-.bento-large .bento-tags {
+.skill-grid-mini {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.mini-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.text-accent {
+  color: var(--accent);
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, FileText, Coffee } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import MagneticButton from './MagneticButton';
 import './Contact.css';
 
 const Contact: React.FC = () => {
@@ -71,18 +70,14 @@ const Contact: React.FC = () => {
               </p>
               
               <div className="action-buttons">
-                <MagneticButton>
-                  <a href="mailto:jhu0039@gmail.com" className="btn btn-primary action-btn">
-                    <Coffee size={18} className="btn-icon-left" />
-                    Let's Chat
-                  </a>
-                </MagneticButton>
-                <MagneticButton>
-                  <a href="/Jason_Hu_Resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary action-btn">
-                    <FileText size={18} className="btn-icon-left" />
-                    View Resume
-                  </a>
-                </MagneticButton>
+                <a href="mailto:jhu0039@gmail.com" className="btn btn-primary action-btn">
+                  <Coffee size={18} className="btn-icon-left" />
+                  Let's Chat
+                </a>
+                <a href="/Jason_Hu_Resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary action-btn">
+                  <FileText size={18} className="btn-icon-left" />
+                  View Resume
+                </a>
               </div>
             </motion.div>
 

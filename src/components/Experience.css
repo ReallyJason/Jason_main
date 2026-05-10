@@ -80,8 +80,9 @@
 
 .experience-details-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1.4fr 1fr;
   gap: 40px;
+  align-items: start;
 }
 
 @media (max-width: 992px) {
@@ -124,28 +125,72 @@
   color: var(--text-primary);
 }
 
-.toolkit-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+/* Modern Sidebar Toolkit Styles */
+.toolkit-sidebar-modern {
   padding: 24px;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
 }
 
-.toolkit-section h6 {
-  font-size: 0.8rem;
+.toolkit-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.mini-group h6 {
+  font-size: 0.75rem;
   text-transform: uppercase;
   color: var(--text-secondary);
   margin-bottom: 12px;
   letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+  opacity: 0.7;
 }
 
-.toolkit-tags {
+.mini-items {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mini-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.mini-item:hover {
+  border-color: var(--accent);
+  background: rgba(0, 242, 255, 0.05);
+  transform: translateX(4px);
+}
+
+.mini-item span {
+  font-weight: 500;
+}
+
+.mini-group.wide {
+  grid-column: span 2;
+  margin-top: 8px;
+}
+
+.docs-row {
+  flex-direction: row;
   flex-wrap: wrap;
-  gap: 8px;
+}
+
+@media (max-width: 1200px) {
+  .docs-row {
+    flex-direction: column;
+  }
 }
 
 .experience-gallery {

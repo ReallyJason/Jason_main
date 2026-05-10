@@ -9,6 +9,11 @@ const Projects: React.FC = () => {
     {
       title: "TaskMaster Pro",
       description: "A collaborative project management tool built with React, Node.js, and WebSockets for real-time updates.",
+      highlights: [
+        "Real-time state sync via Socket.io",
+        "Optimistic UI updates",
+        "JWT-based role management"
+      ],
       techStack: ["React", "Node.js", "Socket.io", "MongoDB"],
       githubUrl: "#",
       liveUrl: "#"
@@ -16,12 +21,22 @@ const Projects: React.FC = () => {
     {
       title: "Nebula Engine",
       description: "A lightweight 2D game engine tailored for rapid prototyping, written entirely in C++ with OpenGL.",
+      highlights: [
+        "Custom Entity Component System (ECS)",
+        "Batch renderer optimization",
+        "Cross-platform GLSL shaders"
+      ],
       techStack: ["C++", "OpenGL", "CMake"],
       githubUrl: "#"
     },
     {
       title: "FinTech Dashboard",
       description: "A modern, responsive financial dashboard visualizing crypto and stock data using D3.js and TailwindCSS.",
+      highlights: [
+        "Custom D3.js chart components",
+        "Live WebSocket data streams",
+        "Complex state management"
+      ],
       techStack: ["TypeScript", "D3.js", "TailwindCSS"],
       githubUrl: "#",
       liveUrl: "#"
@@ -73,6 +88,12 @@ const Projects: React.FC = () => {
               <div className="project-content">
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-desc">{project.description}</p>
+                
+                <ul className="project-highlights">
+                  {project.highlights.map((highlight, i) => (
+                    <li key={i}>{highlight}</li>
+                  ))}
+                </ul>
               </div>
 
               <div className="project-tech">

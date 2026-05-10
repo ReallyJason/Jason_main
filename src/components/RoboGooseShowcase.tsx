@@ -76,22 +76,26 @@ const RoboGooseShowcase: React.FC = () => {
             <div className="robogoose-mechanics">
               <h3>Specialized Arsenal</h3>
               <div className="mechanic-grid">
-                <div className="mechanic-card glass">
+                <div className="mechanic-card glass border-beam-container">
+                  <div className="border-beam" />
                   <Crosshair className="mechanic-icon" size={24} />
                   <h4>Pistol</h4>
                   <p>A primary projectile weapon for long-range engagements.</p>
                 </div>
-                <div className="mechanic-card glass">
+                <div className="mechanic-card glass border-beam-container">
+                  <div className="border-beam" />
                   <Wind className="mechanic-icon" size={24} />
                   <h4>Sonic Honk</h4>
                   <p>A short-range acoustic blast that ragdolls enemies and manipulates objects.</p>
                 </div>
-                <div className="mechanic-card glass">
+                <div className="mechanic-card glass border-beam-container">
+                  <div className="border-beam" />
                   <Zap className="mechanic-icon" size={24} />
                   <h4>Tactical Dash</h4>
                   <p>A high-velocity burst to dodge, close the distance, or clear massive gaps.</p>
                 </div>
-                <div className="mechanic-card glass">
+                <div className="mechanic-card glass border-beam-container">
+                  <div className="border-beam" />
                   <Map className="mechanic-icon" size={24} />
                   <h4>WASD Navigation</h4>
                   <p>Precise, 360-degree ground movement for tight maneuvering.</p>

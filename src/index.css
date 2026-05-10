@@ -37,13 +37,22 @@ html {
   margin: 0;
   padding: 0;
 }
-
 html, body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
   position: relative;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Hide default browser scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 #root, .app-container, main {
@@ -156,6 +165,76 @@ img, video {
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--accent);
+}
+
+/* Lenis Smooth Scroll Fixes */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.section {
+  padding: 80px 0;
+}
+.border-beam-container {
+  position: relative;
+  z-index: 1;
+}
+
+.border-beam {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px; /* The thickness of the beam */
+  background: linear-gradient(
+    var(--beam-angle, 0deg),
+    transparent 0%,
+    var(--accent) 50%,
+    transparent 100%
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.border-beam-container:hover .border-beam {
+  opacity: 1;
+  animation: beam-rotate 4s linear infinite;
+}
+
+@keyframes beam-rotate {
+  from {
+    --beam-angle: 0deg;
+  }
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+/* Fallback for browsers that don't support custom properties in animations */
+@property --beam-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }
 
 .section {

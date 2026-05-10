@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Play, X, Hexagon } from 'lucide-react';
-import MagneticButton from './MagneticButton';
 import './HiveShowcase.css';
 
 const HiveShowcase: React.FC = () => {
@@ -54,15 +53,13 @@ const HiveShowcase: React.FC = () => {
             <p className="section-subtitle">
               A next-generation marketplace platform. Like Fiverr, but built specifically to be more creator-friendly with significantly lower service fees.
             </p>
-            <MagneticButton>
-              <a href="http://hive.jasonhusoftware.com" target="_blank" rel="noopener noreferrer" className="btn hive-btn hive-link">
-                Visit the Hive <ExternalLink className="btn-icon" size={18} />
-              </a>
-            </MagneticButton>
+            <a href="http://hive.jasonhusoftware.com" target="_blank" rel="noopener noreferrer" className="btn hive-btn hive-link">
+              Visit the Hive <ExternalLink className="btn-icon" size={18} />
+            </a>
           </div>
           
           <div className="hive-mascot-container">
-            <img src="/HiveFiveLogo.webp" alt="HiveFive Logo" className="hive-mascot" />
+            <img src="/HiveFiveLogo.webp" alt="HiveFive Logo" className="hive-mascot" loading="lazy" />
           </div>
         </motion.div>
 
@@ -70,12 +67,13 @@ const HiveShowcase: React.FC = () => {
           {features.map((feature, index) => (
             <motion.div 
               key={index}
-              className="hive-card glass"
+              className="hive-card glass border-beam-container"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
+              <div className="border-beam" />
               <div 
                 className="hive-video-container"
                 onClick={() => setActiveVideo(feature.video)}
@@ -97,7 +95,8 @@ const HiveShowcase: React.FC = () => {
                   loop 
                   muted 
                   playsInline 
-                  preload="metadata"
+                  preload="auto"
+                  title={`Preview of ${feature.title}`}
                 />
                 <div className="hive-video-overlay">
                   <div className="play-button">
