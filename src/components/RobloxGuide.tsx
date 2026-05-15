@@ -26,7 +26,8 @@ const RobloxGuide: React.FC = () => {
           label: "Create & Configure Instance",
           content: (
             <>
-              <p>Go to the <strong>AWS EC2 Dashboard</strong> and click <strong>Launch Instance</strong>. Name your server (e.g., <code>roblox-server</code>).</p>
+              <p>Go to <a href="https://aws.amazon.com/ec2/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}><strong>Amazon EC2</strong></a> and sign in to your account. Open the <strong>EC2 Dashboard</strong> and click <strong>Launch Instance</strong>.</p>
+              <p>Name your server (e.g., <code>roblox-server</code>) and configure the base settings:</p>
               <ul>
                 <li><strong>OS:</strong> Select <strong>Ubuntu</strong> → <code>Ubuntu Server 26.04 LTS (HVM)</code>.</li>
                 <li><strong>Instance Type:</strong> Choose <code>m7i-flex.large</code>. <em>(Smaller sizes will likely fail or lag heavily).</em></li>
@@ -266,11 +267,11 @@ sudo systemctl restart waydroid-container</code></pre>
       ]
     },
     {
-      title: "8. Extras & Troubleshooting",
+      title: "8. Auto Clicker & Troubleshooting",
       icon: <Settings className="step-icon" />,
       steps: [
         {
-          label: "Optional Auto Clicker",
+          label: "Auto Clicker Setup",
           content: (
             <>
               <p>Install xdotool to enable automated clicking:</p>
@@ -329,17 +330,17 @@ sudo systemctl restart waydroid-container</code></pre>
           <h1 className="section-title">Roblox Cloud Setup Guide</h1>
           <p className="subtitle">A comprehensive, step-by-step manual for running Roblox on AWS EC2 via Waydroid.</p>
         </motion.div>
-
-        <div className="guide-sections-list">
-          {sections.map((section, sIndex) => (
-            <motion.div 
-              key={sIndex}
-              className="guide-section-card glass border-beam-container"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: sIndex * 0.1 }}
-            >
+<div className="guide-sections-list">
+  {sections.map((section, sIndex) => (
+    <motion.div 
+      key={sIndex}
+      id={`roblox-section-${sIndex + 1}`}
+      className="guide-section-card glass border-beam-container"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: sIndex * 0.1 }}
+    >
               <div className="border-beam" />
               <div className="section-header">
                 <div className="section-icon-wrapper">
