@@ -74,11 +74,10 @@ const Contact: React.FC = () => {
                   <Coffee size={18} className="btn-icon-left" />
                   Let's Chat
                 </a>
-                <a href="/Jason_Hu_Resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary action-btn">
+                <a href="https://drive.google.com/file/d/1ZJeEGTaYPUxbWY6yWjx7P-c1q3Tgrgl9/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="btn btn-secondary action-btn">
                   <FileText size={18} className="btn-icon-left" />
                   View Resume
-                </a>
-              </div>
+                </a>              </div>
             </motion.div>
 
             <motion.div 

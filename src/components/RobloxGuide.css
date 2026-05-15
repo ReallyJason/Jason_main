@@ -1,0 +1,186 @@
+.roblox-guide-page {
+  min-height: 100vh;
+  padding: 120px 20px 60px;
+  position: relative;
+  overflow-x: hidden;
+  background: var(--bg);
+}
+
+.guide-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 40px;
+  transition: color 0.2s;
+  width: fit-content;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.guide-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.guide-header h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 16px;
+  background: linear-gradient(to right, #fff, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.guide-header .subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.guide-steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.guide-step-card {
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.step-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(var(--accent-rgb), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.step-header h3 {
+  font-size: 1.25rem;
+  color: #fff;
+  margin: 0;
+}
+
+.step-content {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.step-content ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.step-content li {
+  margin-bottom: 8px;
+}
+
+.step-content code {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+  color: var(--accent);
+}
+
+.code-block-container {
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.code-block-container pre {
+  margin: 0;
+  overflow-x: auto;
+}
+
+.code-block-container code {
+  background: none;
+  padding: 0;
+  color: #e0e0e0;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  background: rgba(var(--accent-rgb), 0.1);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.guide-footer {
+  margin-top: 60px;
+  padding: 40px;
+  text-align: center;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-icon {
+  color: #2ed573;
+  width: 48px;
+  height: 48px;
+}
+
+.guide-footer p {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .roblox-guide-page {
+    padding-top: 100px;
+  }
+  
+  .guide-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .guide-step-card {
+    padding: 20px;
+  }
+}

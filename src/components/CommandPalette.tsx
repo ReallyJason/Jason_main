@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   Search, Command, User, Briefcase, Zap, 
-  Gamepad2, Mail, Sun, Download 
+  Gamepad2, Mail, Sun, Download, Smartphone
 } from 'lucide-react';
 import { playBlip } from '../utils/audio';
 import './CommandPalette.css';
@@ -15,12 +16,14 @@ interface CommandPaletteProps {
 const CommandPalette: React.FC<CommandPaletteProps> = ({ isExternalOpen, onClose }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
+  const navigate = useNavigate();
 
   const actions = [
     { id: 'about', title: 'Go to About', icon: <User size={18} />, section: '#about' },
     { id: 'exp', title: 'Go to Experience', icon: <Briefcase size={18} />, section: '#experience' },
     { id: 'hive', title: 'Go to HiveFive', icon: <Zap size={18} />, section: '#hive' },
     { id: 'goose', title: 'Go to RoboGoose', icon: <Gamepad2 size={18} />, section: '#robogoose' },
+    { id: 'roblox', title: 'Roblox Setup Guide', icon: <Smartphone size={18} />, path: '/roblox' },
     { id: 'contact', title: 'Go to Contact', icon: <Mail size={18} />, section: '#contact' },
     { id: 'theme', title: 'Toggle Theme', icon: <Sun size={18} />, action: 'theme' },
     { id: 'resume', title: 'View Resume', icon: <Download size={18} />, action: 'resume' },
@@ -32,18 +35,28 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isExternalOpen, onClose
 
   const handleAction = useCallback((action: typeof actions[0]) => {
     playBlip();
-    if (action.section) {
-      document.querySelector(action.section)?.scrollIntoView({ behavior: 'smooth' });
+    if (action.path) {
+      navigate(action.path);
+    } else if (action.section) {
+      if (window.location.pathname !== '/') {
+        navigate('/');
+        // Wait for navigation to complete then scroll
+        setTimeout(() => {
+          document.querySelector(action.section!)?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else {
+        document.querySelector(action.section)?.scrollIntoView({ behavior: 'smooth' });
+      }
     } else if (action.action === 'theme') {
       const btn = document.querySelector('.theme-toggle-btn') as HTMLButtonElement;
       btn?.click();
     } else if (action.action === 'resume') {
-      window.open('https://drive.google.com/file/d/1ZJeEGTaYPUxbWY6yWjx7P-c1q3Tgrgl9/view?usp=sharing', '_blank');
+      window.open('https://drive.google.com/file/d/1ZJeEGTaYPUxbWY6yWjx7P-c1q3Tgrgl9/view?usp=drive_link', '_blank');
     }
     setIsOpen(false);
     if (onClose) onClose();
     setQuery('');
-  }, [onClose]);
+  }, [onClose, navigate]);
 
   // Sync state from props during render phase
   if (isExternalOpen && !isOpen) {

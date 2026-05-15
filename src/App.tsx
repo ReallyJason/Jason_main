@@ -1,4 +1,5 @@
 import { Suspense, lazy, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Hero from './components/Hero';
 import ThemeToggle from './components/ThemeToggle';
 import InteractiveBackground from './components/InteractiveBackground';
@@ -10,12 +11,13 @@ import { useLenis } from './utils/lenis';
 import ScrollProgress from './components/ScrollProgress';
 import SkeletonLoader from './components/SkeletonLoader';
 
-// Lazy load components that are not immediately visible
+// Lazy load components
 const About = lazy(() => import('./components/About'));
 const Experience = lazy(() => import('./components/Experience'));
 const HiveShowcase = lazy(() => import('./components/HiveShowcase'));
 const RoboGooseShowcase = lazy(() => import('./components/RoboGooseShowcase'));
 const Contact = lazy(() => import('./components/Contact'));
+const RobloxGuide = lazy(() => import('./components/RobloxGuide'));
 
 function App() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -28,34 +30,45 @@ function App() {
       <ScrollProgress />
       <CommandPalette isExternalOpen={isNavOpen} onClose={() => setIsNavOpen(false)} />
       <main>
-        <div id="hero">
-          <Hero />
-        </div>
-        <div className="section-divider" />
-        
-        <Suspense fallback={<SkeletonLoader type="about" />}>
-          <About />
-        </Suspense>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <div id="hero">
+                <Hero />
+              </div>
+              <div className="section-divider" />
+              
+              <Suspense fallback={<SkeletonLoader type="about" />}>
+                <About />
+              </Suspense>
 
-        <div className="section-divider" />
-        
-        <Suspense fallback={<SkeletonLoader type="experience" />}>
-          <Experience />
-        </Suspense>
+              <div className="section-divider" />
+              
+              <Suspense fallback={<SkeletonLoader type="experience" />}>
+                <Experience />
+              </Suspense>
 
-        <Suspense fallback={<SkeletonLoader type="project" />}>
-          <HiveShowcase />
-        </Suspense>
+              <Suspense fallback={<SkeletonLoader type="project" />}>
+                <HiveShowcase />
+              </Suspense>
 
-        <Suspense fallback={<SkeletonLoader type="project" />}>
-          <RoboGooseShowcase />
-        </Suspense>
+              <Suspense fallback={<SkeletonLoader type="project" />}>
+                <RoboGooseShowcase />
+              </Suspense>
 
-        <div className="section-divider" />
-        
-        <Suspense fallback={<div className="section-loader" />}>
-          <Contact />
-        </Suspense>
+              <div className="section-divider" />
+              
+              <Suspense fallback={<div className="section-loader" />}>
+                <Contact />
+              </Suspense>
+            </>
+          } />
+          <Route path="/roblox" element={
+            <Suspense fallback={<div className="section-loader" />}>
+              <RobloxGuide />
+            </Suspense>
+          } />
+        </Routes>
       </main>
       <Footer />
       <ThemeToggle />

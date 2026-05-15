@@ -320,7 +320,7 @@
   filter: drop-shadow(0 0 30px rgba(255, 184, 0, 0.6));
 }
 
-.hex-1 { top: 10%; left: 5%; transform: rotate(15deg) scale(2); }
+.hex-1 { top: 22%; left: 5%; transform: rotate(15deg) scale(2); }
 .hex-2 { bottom: 20%; right: 5%; transform: rotate(-15deg) scale(3); }
 
 @media (max-width: 768px) {
