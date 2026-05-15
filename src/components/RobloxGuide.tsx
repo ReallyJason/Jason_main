@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Server, Key, Play, Shield, HardDrive, Terminal, 
-  Settings, Cpu, Box, Layout, Smartphone, MousePointer,
-  ChevronLeft, ExternalLink, Copy, CheckCircle2
+  Server, Terminal, 
+  Settings, Box, Layout, Smartphone, 
+  ChevronLeft, Copy, CheckCircle2, AlertTriangle, Info, Monitor, Cpu
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './RobloxGuide.css';
@@ -15,221 +15,300 @@ const RobloxGuide: React.FC = () => {
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    // Could add a toast here
   };
 
-  const steps = [
+  const sections = [
     {
-      title: "1. Create an EC2 Instance",
+      title: "1. AWS Instance Provisioning",
       icon: <Server className="step-icon" />,
-      content: (
-        <ul>
-          <li>Go to AWS EC2 Dashboard.</li>
-          <li>Click <strong>Launch Instance</strong>.</li>
-          <li><strong>Image:</strong> Ubuntu Server 26.04 LTS (HVM), SSD Volume Type.</li>
-          <li><strong>Instance Type:</strong> <code>m7i-flex.large</code></li>
-        </ul>
-      )
+      steps: [
+        {
+          label: "Create & Configure Instance",
+          content: (
+            <>
+              <p>Go to the <strong>AWS EC2 Dashboard</strong> and click <strong>Launch Instance</strong>. Name your server (e.g., <code>roblox-server</code>).</p>
+              <ul>
+                <li><strong>OS:</strong> Select <strong>Ubuntu</strong> → <code>Ubuntu Server 26.04 LTS (HVM)</code>.</li>
+                <li><strong>Instance Type:</strong> Choose <code>m7i-flex.large</code>. <em>(Smaller sizes will likely fail or lag heavily).</em></li>
+              </ul>
+            </>
+          )
+        },
+        {
+          label: "Key Pair (CRITICAL)",
+          content: (
+            <div className="warning-box">
+              <AlertTriangle size={18} />
+              <p>Create a new key pair named <code>roblox-key</code>, format <code>.pem</code>. Download it and move it to your <strong>Desktop</strong>. <strong>Do not lose this file</strong>, or you will be locked out of your server.</p>
+            </div>
+          )
+        },
+        {
+          label: "Network Setup",
+          content: (
+            <p>Under Network Settings, click <strong>Edit</strong>. Add an Inbound Rule: <strong>Type: RDP</strong>, <strong>Port: 3389</strong>, <strong>Source: My IP</strong>. This is required for Remote Desktop access later.</p>
+          )
+        },
+        {
+          label: "Storage & Launch",
+          content: (
+            <>
+              <p>Increase storage to <strong>30 GB</strong>. Waydroid and the Ubuntu Desktop environment are quite large.</p>
+              <p>Click <strong>Launch Instance</strong> and wait for the status to show <code>Running</code> with <code>2/2 checks passed</code>.</p>
+            </>
+          )
+        }
+      ]
     },
     {
-      title: "2. Create a Key Pair",
-      icon: <Key className="step-icon" />,
-      content: (
-        <ul>
-          <li>Click <strong>Create new key pair</strong>.</li>
-          <li>Give it a name and download the <code>.pem</code> file.</li>
-          <li>Save it somewhere accessible (Desktop/Downloads).</li>
-        </ul>
-      )
-    },
-    {
-      title: "3. Launch Instance",
-      icon: <Play className="step-icon" />,
-      content: <p>Click <strong>Launch/Create Instance</strong> to start the provisioning process.</p>
-    },
-    {
-      title: "4. Open Port 3389 for RDP",
-      icon: <Shield className="step-icon" />,
-      content: (
-        <ul>
-          <li>Go to Security tab of your instance.</li>
-          <li>Edit Inbound Rules.</li>
-          <li>Add Rule: Type: <strong>RDP</strong>, Port: <strong>3389</strong>, Source: <strong>My IP</strong>.</li>
-        </ul>
-      )
-    },
-    {
-      title: "5. Increase Storage Volume",
-      icon: <HardDrive className="step-icon" />,
-      content: (
-        <ul>
-          <li>Desktop + Waydroid requires more storage (30GB recommended).</li>
-          <li>Go to Storage tab → Click Volume ID → Actions → <strong>Modify Volume</strong>.</li>
-          <li>Set size to <strong>30GB</strong> and Modify.</li>
-          <li><em>Note: Restart the instance after modification.</em></li>
-        </ul>
-      )
-    },
-    {
-      title: "6. Connect via SSH",
+      title: "2. Initial Connection (SSH)",
       icon: <Terminal className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`chmod 400 "your-key.pem"
-ssh -i "your-key.pem" ubuntu@your-public-ip`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('chmod 400 "your-key.pem"\nssh -i "your-key.pem" ubuntu@your-public-ip')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
+      steps: [
+        {
+          label: "Connect to your Server",
+          content: (
+            <>
+              <p>Open your computer's terminal (Terminal on Mac, PowerShell/Terminal on Windows) and navigate to your key location:</p>
+              <div className="code-block-container">
+                <pre><code>cd Desktop</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('cd Desktop')}><Copy size={14} /></button>
+              </div>
+              
+              <p>First, restrict the key permissions (required for security):</p>
+              <div className="code-block-container">
+                <pre><code>chmod 400 roblox-key.pem</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('chmod 400 roblox-key.pem')}><Copy size={14} /></button>
+              </div>
+
+              <p>Now, SSH into the server using the command provided in the AWS "Connect" tab:</p>
+              <div className="code-block-container">
+                <pre><code>ssh -i "roblox-key.pem" ubuntu@YOUR-SERVER-IP</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('ssh -i "roblox-key.pem" ubuntu@YOUR-SERVER-IP')}><Copy size={14} /></button>
+              </div>
+              <p>Type <code>yes</code> if asked about the host's authenticity.</p>
+            </>
+          )
+        }
+      ]
     },
     {
-      title: "7. Update System + Install Desktop",
-      icon: <Settings className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`sudo apt update && sudo apt upgrade -y
-sudo apt install -y ubuntu-desktop`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('sudo apt update && sudo apt upgrade -y\nsudo apt install -y ubuntu-desktop')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
-    },
-    {
-      title: "8. XRDP Setup",
+      title: "3. Desktop Environment Setup",
       icon: <Layout className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`sudo apt install -y xrdp
-sudo usermod -a -G ssl-cert xrdp
-sudo passwd ubuntu
-sudo systemctl restart xrdp`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install -y xrdp\nsudo usermod -a -G ssl-cert xrdp\nsudo passwd ubuntu\nsudo systemctl restart xrdp')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
-    },
-    {
-      title: "9. Install Waydroid",
-      icon: <Box className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`curl https://repo.waydro.id | sudo bash
-sudo apt install waydroid -y
-sudo waydroid init -s GAPPS
-sudo systemctl restart waydroid-container`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('curl https://repo.waydro.id | sudo bash\nsudo apt install waydroid -y\nsudo waydroid init -s GAPPS\nsudo systemctl restart waydroid-container')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
-    },
-    {
-      title: "10. Fix RDP Crash (Install XFCE)",
-      icon: <Smartphone className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`sudo apt install xfce4 xfce4-goodies -y
+      steps: [
+        {
+          label: "Install Ubuntu Desktop",
+          content: (
+            <>
+              <p>Update the system packages to ensure everything is current:</p>
+              <div className="code-block-container">
+                <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo apt update && sudo apt upgrade -y')}><Copy size={14} /></button>
+              </div>
+
+              <p>Install the full Ubuntu Desktop environment. <strong>Warning:</strong> This can take 10-20 minutes. Do not close your terminal.</p>
+              <div className="code-block-container">
+                <pre><code>sudo apt install ubuntu-desktop -y</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install ubuntu-desktop -y')}><Copy size={14} /></button>
+              </div>
+            </>
+          )
+        },
+        {
+          label: "Remote Desktop (XRDP)",
+          content: (
+            <>
+              <p>Install XRDP to allow remote desktop connections:</p>
+              <div className="code-block-container">
+                <pre><code>sudo apt install xrdp -y</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install xrdp -y')}><Copy size={14} /></button>
+              </div>
+
+              <p>Grant permissions and set a password for the <code>ubuntu</code> user:</p>
+              <div className="code-block-container">
+                <pre><code>sudo usermod -a -G ssl-cert xrdp
+sudo passwd ubuntu</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo usermod -a -G ssl-cert xrdp\nsudo passwd ubuntu')}><Copy size={14} /></button>
+              </div>
+            </>
+          )
+        },
+        {
+          label: "Fix Disconnect Bug",
+          content: (
+            <>
+              <p>Standard Ubuntu Desktop often crashes over RDP. Installing XFCE fixes this:</p>
+              <div className="code-block-container">
+                <pre><code>{`sudo apt install xfce4 xfce4-goodies -y
 echo "startxfce4" > ~/.xsession
 chmod 644 ~/.xsession
-sudo systemctl restart xrdp
-sudo reboot`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install xfce4 xfce4-goodies -y\necho "startxfce4" > ~/.xsession\nchmod 644 ~/.xsession\nsudo systemctl restart xrdp\nsudo reboot')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
+sudo systemctl restart xrdp`}</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install xfce4 xfce4-goodies -y\necho "startxfce4" > ~/.xsession\nchmod 644 ~/.xsession\nsudo systemctl restart xrdp')}><Copy size={14} /></button>
+              </div>
+              <p>Finally, reboot the server. You will be disconnected.</p>
+              <div className="code-block-container">
+                <pre><code>sudo reboot</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo reboot')}><Copy size={14} /></button>
+              </div>
+            </>
+          )
+        }
+      ]
     },
     {
-      title: "11. Remote Desktop Login",
-      icon: <ExternalLink className="step-icon" />,
-      content: <p>Connect via <strong>Remote Desktop Connection</strong> using the EC2 Public IP. Login with <code>ubuntu</code> and your password.</p>
+      title: "4. Connecting to Desktop",
+      icon: <Monitor className="step-icon" />,
+      steps: [
+        {
+          label: "Remote Desktop Login",
+          content: (
+            <>
+              <p>Wait 1 minute for the server to reboot, then open <strong>Remote Desktop Connection</strong> (Windows) or the <strong>Microsoft Remote Desktop</strong> app (Mac).</p>
+              <p>Connect using your <strong>Public IPv4 address</strong> from AWS. Use the username <code>ubuntu</code> and the password you created in Step 22.</p>
+            </>
+          )
+        }
+      ]
     },
     {
-      title: "12. Install Weston",
-      icon: <Layout className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`sudo apt install weston -y`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install weston -y')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
+      title: "5. Waydroid Installation",
+      icon: <Box className="step-icon" />,
+      steps: [
+        {
+          label: "Install & Initialize Waydroid",
+          content: (
+            <>
+              <p>Inside the Ubuntu Desktop terminal, install the necessary tools and repository:</p>
+              <div className="code-block-container">
+                <pre><code>sudo apt install curl -y
+curl https://repo.waydro.id | sudo bash
+sudo apt install waydroid -y</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install curl -y\ncurl https://repo.waydro.id | sudo bash\nsudo apt install waydroid -y')}><Copy size={14} /></button>
+              </div>
+
+              <p>Initialize Waydroid with Google Apps (GAPPS) support:</p>
+              <div className="code-block-container">
+                <pre><code>sudo waydroid init -s GAPPS
+sudo systemctl restart waydroid-container</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo waydroid init -s GAPPS\nsudo systemctl restart waydroid-container')}><Copy size={14} /></button>
+              </div>
+            </>
+          )
+        }
+      ]
     },
     {
-      title: "13. Clone Translation Scripts",
-      icon: <Terminal className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`sudo apt install git -y
-git clone https://github.com/casualsnek/waydroid_script
-cd waydroid_script`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install git -y\ngit clone https://github.com/casualsnek/waydroid_script\ncd waydroid_script')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
-    },
-    {
-      title: "14. Setup Python Environment",
+      title: "6. ARM Translation (libhoudini)",
       icon: <Cpu className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`sudo apt install python3.14-venv -y
+      steps: [
+        {
+          label: "Setup ARM Translation",
+          content: (
+            <>
+              <p>Install Weston and Git to run the translation scripts:</p>
+              <div className="code-block-container">
+                <pre><code>sudo apt install weston git -y</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install weston git -y')}><Copy size={14} /></button>
+              </div>
+
+              <p>Clone the script and setup the Python environment:</p>
+              <div className="code-block-container">
+                <pre><code>git clone https://github.com/casualsnek/waydroid_script
+cd waydroid_script
+sudo apt install python3.14-venv -y
 python3 -m venv venv
-venv/bin/pip install -r requirements.txt`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install python3.14-venv -y\npython3 -m venv venv\nvenv/bin/pip install -r requirements.txt')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
+venv/bin/pip install -r requirements.txt</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('git clone https://github.com/casualsnek/waydroid_script\ncd waydroid_script\nsudo apt install python3.14-venv -y\npython3 -m venv venv\nvenv/bin/pip install -r requirements.txt')}><Copy size={14} /></button>
+              </div>
+
+              <p>Install <strong>libhoudini</strong> (enables Roblox to run on Intel/AMD CPUs):</p>
+              <div className="code-block-container">
+                <pre><code>sudo venv/bin/python3 main.py install libhoudini
+sudo systemctl restart waydroid-container</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo venv/bin/python3 main.py install libhoudini\nsudo systemctl restart waydroid-container')}><Copy size={14} /></button>
+              </div>
+            </>
+          )
+        }
+      ]
     },
     {
-      title: "15. Install libhoudini",
-      icon: <Box className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`sudo venv/bin/python3 main.py install libhoudini
-sudo systemctl restart waydroid-container`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('sudo venv/bin/python3 main.py install libhoudini\nsudo systemctl restart waydroid-container')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
-    },
-    {
-      title: "16. Launch Waydroid UI",
+      title: "7. Launching Roblox",
       icon: <Smartphone className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`# Inside Weston terminal:
-waydroid show-full-ui`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('waydroid show-full-ui')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
+      steps: [
+        {
+          label: "Start Android Properly",
+          content: (
+            <>
+              <div className="info-box">
+                <Info size={18} />
+                <p>Weston opens a nested display. We use <code>idle-time=0</code> to prevent it from auto-closing.</p>
+              </div>
+              <p>Launch Weston from the Ubuntu terminal:</p>
+              <div className="code-block-container">
+                <pre><code>weston --backend=x11-backend.so --idle-time=0</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('weston --backend=x11-backend.so --idle-time=0')}><Copy size={14} /></button>
+              </div>
+              
+              <p>Inside the new Weston window, right-click and open a terminal, then launch Android:</p>
+              <div className="code-block-container">
+                <pre><code>waydroid show-full-ui</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('waydroid show-full-ui')}><Copy size={14} /></button>
+              </div>
+            </>
+          )
+        },
+        {
+          label: "Install Roblox",
+          content: (
+            <p>Once Android loads, open the <strong>Play Store</strong>, sign in to your Google account, and download <strong>Roblox</strong>. Log in and you're ready to play!</p>
+          )
+        }
+      ]
     },
     {
-      title: "17. Install Roblox",
-      icon: <Box className="step-icon" />,
-      content: <p>In Waydroid: Open <strong>Play Store</strong> → Login → Download <strong>Roblox</strong>.</p>
-    },
-    {
-      title: "18. Auto Clicker (Optional)",
-      icon: <MousePointer className="step-icon" />,
-      content: (
-        <div className="code-block-container">
-          <pre><code>{`sudo apt install xdotool -y
-while true; do xdotool click 1; sleep 15; done`}</code></pre>
-          <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install xdotool -y\nwhile true; do xdotool click 1; sleep 15; done')}>
-            <Copy size={14} />
-          </button>
-        </div>
-      )
+      title: "8. Extras & Troubleshooting",
+      icon: <Settings className="step-icon" />,
+      steps: [
+        {
+          label: "Optional Auto Clicker",
+          content: (
+            <>
+              <p>Install xdotool to enable automated clicking:</p>
+              <div className="code-block-container">
+                <pre><code>sudo apt install xdotool -y</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install xdotool -y')}><Copy size={14} /></button>
+              </div>
+
+              <p>Run the click loop (clicks every 15 seconds). Move your mouse over Roblox first:</p>
+              <div className="code-block-container">
+                <pre><code>while true; do xdotool click 1; sleep 15; done</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('while true; do xdotool click 1; sleep 15; done')}><Copy size={14} /></button>
+              </div>
+              <p>Press <code>Ctrl + C</code> to stop.</p>
+            </>
+          )
+        },
+        {
+          label: "Troubleshooting",
+          content: (
+            <div className="troubleshooting-grid">
+              <div className="trouble-item">
+                <strong>Instant Disconnect?</strong>
+                <p>Rerun the XFCE fix and reboot: <code>{`echo "startxfce4" > ~/.xsession && sudo reboot`}</code></p>
+              </div>
+
+              <div className="trouble-item">
+                <strong>Android won't open?</strong>
+                <p>Restart the container: <code>sudo systemctl restart waydroid-container</code></p>
+              </div>
+              <div className="trouble-item">
+                <strong>Laggy experience?</strong>
+                <p>Upgrade to a larger AWS instance type like <code>m7i-flex.xlarge</code>.</p>
+              </div>
+            </div>
+          )
+        }
+      ]
     }
   ];
 
@@ -247,29 +326,37 @@ while true; do xdotool click 1; sleep 15; done`}</code></pre>
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="section-title">AWS EC2 Ubuntu + Waydroid + Roblox</h1>
-          <p className="subtitle">The ultimate guide to setting up a cloud-based Android environment for Roblox.</p>
+          <h1 className="section-title">Roblox Cloud Setup Guide</h1>
+          <p className="subtitle">A comprehensive, step-by-step manual for running Roblox on AWS EC2 via Waydroid.</p>
         </motion.div>
 
-        <div className="guide-steps-grid">
-          {steps.map((step, index) => (
+        <div className="guide-sections-list">
+          {sections.map((section, sIndex) => (
             <motion.div 
-              key={index}
-              className="guide-step-card glass border-beam-container"
+              key={sIndex}
+              className="guide-section-card glass border-beam-container"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
+              transition={{ duration: 0.5, delay: sIndex * 0.1 }}
             >
               <div className="border-beam" />
-              <div className="step-header">
-                <div className="step-icon-wrapper">
-                  {step.icon}
+              <div className="section-header">
+                <div className="section-icon-wrapper">
+                  {section.icon}
                 </div>
-                <h3>{step.title}</h3>
+                <h2>{section.title}</h2>
               </div>
-              <div className="step-content">
-                {step.content}
+              
+              <div className="section-steps">
+                {section.steps.map((step, tIndex) => (
+                  <div key={tIndex} className="guide-sub-step">
+                    <h3 className="sub-step-label">{step.label}</h3>
+                    <div className="sub-step-content">
+                      {step.content}
+                    </div>
+                  </div>
+                ))}
               </div>
             </motion.div>
           ))}
@@ -282,7 +369,7 @@ while true; do xdotool click 1; sleep 15; done`}</code></pre>
           viewport={{ once: true }}
         >
           <CheckCircle2 className="footer-icon" />
-          <p>Setup complete! Your EC2 instance is now a cloud Android phone.</p>
+          <p>Guide complete! Your AWS instance is now a high-performance cloud gaming rig.</p>
         </motion.div>
       </div>
     </div>
