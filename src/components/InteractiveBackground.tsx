@@ -13,10 +13,10 @@ const InteractiveBackground: React.FC = () => {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const particleCount = 60;
-    const connectionDistance = 150;
+    const particleCount = 20;
+    const connectionDistance = 220;
     const connectionDistanceSq = connectionDistance * connectionDistance;
-    const mouse = { x: -100, y: -100, radius: 150 };
+    const mouse = { x: -100, y: -100, radius: 200 };
     const mouseRadiusSq = mouse.radius * mouse.radius;
 
     class Particle {
@@ -30,9 +30,9 @@ const InteractiveBackground: React.FC = () => {
       constructor() {
         this.x = Math.random() * canvas!.width;
         this.y = Math.random() * canvas!.height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.size = Math.random() * 3 + 1.5;
         // Alternate between Neon Cyan and Electric Purple
         this.color = Math.random() > 0.5 ? '#00f2ff' : '#bc13fe';
       }
