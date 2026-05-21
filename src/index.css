@@ -78,6 +78,24 @@ html, body {
   opacity: 0.02;
 }
 
+/* Hide non-background UI elements until reveal */
+.theme-toggle-btn,
+.nav-toggle-btn,
+.scroll-progress-container,
+.footer {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+body.page-loaded .theme-toggle-btn,
+body.page-loaded .nav-toggle-btn,
+body.page-loaded .scroll-progress-container,
+body.page-loaded .footer {
+  opacity: 1;
+  pointer-events: all;
+}
+
 #root, .app-container, main {
   width: 100%;
   max-width: 100%;
@@ -91,10 +109,11 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s ease, color 0.3s ease;
-  /* Area Light Gradient */
+  /* Professional Area Light Gradient */
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(188, 19, 254, 0.05) 0%, transparent 40%);
+    radial-gradient(circle at 50% 50%, rgba(30, 30, 35, 1) 0%, rgba(18, 18, 18, 1) 100%),
+    radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(188, 19, 254, 0.03) 0%, transparent 50%);
   background-attachment: fixed;
 }
 
@@ -272,7 +291,7 @@ html.lenis, html.lenis body {
 @keyframes slideUpFade {
   0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
@@ -281,21 +300,86 @@ html.lenis, html.lenis body {
 }
 
 .hero-anim-item {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Specific delays for cinematic reveal */
+.hero-title-delay {
   opacity: 0;
   pointer-events: none;
 }
 
-body.page-loaded .hero-anim-item {
-  animation: slideUpFade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+.hero-subtitle-delay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-bio-delay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.page-loaded .hero-title-delay {
+  animation: slideUpFade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
   pointer-events: all;
 }
 
-body.page-loaded .hero-delay-1 { animation-delay: 0.6s; }
-body.page-loaded .hero-delay-2 { animation-delay: 0.8s; }
-body.page-loaded .hero-delay-3 { animation-delay: 1.0s; }
-body.page-loaded .hero-delay-4 { animation-delay: 1.2s; }
-body.page-loaded .hero-delay-5 { animation-delay: 1.4s; }
-body.page-loaded .hero-delay-6 { animation-delay: 1.6s; }
+body.page-loaded .hero-subtitle-delay {
+  animation: slideUpFade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+  pointer-events: all;
+}
+
+body.page-loaded .hero-bio-delay {
+  animation: slideUpFade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+  pointer-events: all;
+}
+
+/* Funny Photo Effect */
+.hero-image-container {
+  position: relative;
+}
+
+.hero-profile-pic:active {
+  transform: scale(1.1); /* Comical expansion */
+  transition: transform 0.1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.easter-egg-label {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background: var(--accent-secondary);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(15px) rotate(15deg) scale(0.8);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+}
+
+.hero-image-container:hover .easter-egg-label {
+  opacity: 1;
+  transform: translateY(0) rotate(15deg) scale(1);
+}
+
+.hero-profile-pic {
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), border-color 0.3s ease;
+}
+
+.hero-profile-pic:hover {
+  animation: quirky-wiggle 0.4s ease-in-out infinite;
+  cursor: help;
+  border-color: var(--accent) !important;
+  transform: translateY(-12px) scale(1.05);
+}
 
 .section {
   padding: 80px 0;
@@ -399,4 +483,3 @@ body.page-loaded .hero-delay-6 { animation-delay: 1.6s; }
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-

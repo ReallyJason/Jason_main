@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, Mail, Briefcase, Zap, Gamepad2 } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Magnetic from './Magnetic';
 import './Hero.css';
 
 const Hero: React.FC = () => {
+  const [isActive, setIsActive] = useState(false);
+
   return (
     <section className="hero-section">
       <div className="glow-blob glow-blue"></div>
@@ -16,12 +18,16 @@ const Hero: React.FC = () => {
             Available for new opportunities
           </div>
 
-          <h1 className="hero-title hero-anim-item hero-delay-2">
-            Hi, I'm <span className="text-gradient-accent">Jason Hu</span>.<br />
-            <span className="text-gradient">Software Developer.</span>
-          </h1>
+          <div className="hero-title-group">
+            <h1 className="hero-title hero-anim-item hero-title-delay">
+              Hi, I'm <span className="text-gradient-accent">Jason Hu</span>.
+            </h1>
+            <h2 className="hero-subtitle-main hero-anim-item hero-subtitle-delay">
+              <span className="text-gradient">Software Developer.</span>
+            </h2>
+          </div>
 
-          <p className="hero-subtitle hero-anim-item hero-delay-3">
+          <p className="hero-subtitle hero-anim-item hero-bio-delay">
             I have a passion for turning complex ideas into reality.
             Whether I'm architecting modern web platforms or engineering engaging game mechanics,
             I bring an easygoing, solution-oriented mindset to the table.
@@ -70,13 +76,20 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        <div className="hero-image-container hero-anim-item hero-delay-6">
+        <div 
+          className="hero-image-container hero-anim-item hero-delay-6"
+          onMouseEnter={() => setIsActive(true)}
+          onMouseLeave={() => setIsActive(false)}
+          onTouchStart={() => setIsActive(true)}
+          onTouchEnd={() => setIsActive(false)}
+        >
           <img 
-            src="/Jason.webp" 
+            src={isActive ? "/buff_jason.png" : "/Jason.webp"} 
             alt="Jason Hu" 
             className="hero-profile-pic" 
             fetchPriority="high"
           />
+          <div className="easter-egg-label">{isActive ? "100% REAL" : "100% BUG FREE*"}</div>
         </div>
       </div>
     </section>

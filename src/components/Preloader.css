@@ -5,69 +5,243 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  pointer-events: none;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.loader-panel {
+  position: absolute;
+  background-color: #0b0b10;
+  z-index: 10;
+  transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+  overflow: visible;
+}
+
+/* Horizontal panels (Top/Bottom) */
+.loader-top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50.1vh;
+}
+
+.loader-bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50.1vh;
+}
+
+/* Vertical panels (Left/Right) */
+.loader-left {
+  top: 0;
+  left: 0;
+  width: 50.1vw;
+  height: 100%;
+  transform: translateX(-100%);
+}
+
+.loader-right {
+  top: 0;
+  right: 0;
+  width: 50.1vw;
+  height: 100%;
+  transform: translateX(100%);
+}
+
+/* The Glowing Horizontal Lines (Attached to Top/Bottom Panels) */
+.panel-line-h {
+  position: absolute;
+  left: 50%;
+  width: 70vw; /* The "certain point" where the draw stops */
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  box-shadow: 0 0 15px var(--accent);
+  transform: translateX(-50%) scaleX(0);
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.2s ease;
+  opacity: 0;
+}
+
+.loader-top .panel-line-h { bottom: 0; }
+.loader-bottom .panel-line-h { top: 0; }
+
+/* The Glowing Vertical Lines (Attached to Left/Right Panels) */
+.panel-line-v {
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  height: 20vh; /* Final height of the rectangle slit */
+  background: linear-gradient(180deg, var(--accent), var(--accent-secondary));
+  box-shadow: 0 0 15px var(--accent);
+  transform: translateY(-50%) scaleY(0);
+  transition: transform 0.4s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.2s ease;
+  opacity: 0;
+}
+
+.loader-left .panel-line-v { right: 0; }
+.loader-right .panel-line-v { left: 0; }
+
+/* PHASE TRANSITIONS */
+
+/* Blackout Phase - Side panels arrive to complete the darkness */
+.phase-blackout .loader-left { transform: translateX(0); }
+.phase-blackout .loader-right { transform: translateX(0); }
+
+/* Incision Phase - Draw the horizontal line (70vw) */
+.phase-incision .loader-left, .phase-incision .loader-right { transform: translateX(0); }
+.phase-incision .panel-line-h {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+/* Peephole Phase - THE PHYSICAL SPLIT */
+/* Panels part, but lines STAY at scaleX(1) to frame the box */
+.phase-peephole .loader-top { transform: translateY(-10vh); }
+.phase-peephole .loader-bottom { transform: translateY(10vh); }
+.phase-peephole .loader-left { transform: translateX(-35vw); }
+.phase-peephole .loader-right { transform: translateX(35vw); }
+
+.phase-peephole .panel-line-h {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+.phase-peephole .panel-line-v {
+  transform: translateY(-50%) scaleY(1);
+  opacity: 1;
+}
+
+/* Expansion Phase - 4-way Shutter Reveal */
+.phase-expansion .loader-top { transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1); }
+.phase-expansion .loader-bottom { transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1); }
+.phase-expansion .loader-left { transform: translateX(-100%); transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1); }
+.phase-expansion .loader-right { transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1); }
+
+/* Fade lines as panels fly off */
+.phase-expansion .panel-line-h, .phase-expansion .panel-line-v {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* TEXT RESOLUTION & IMPLOSION */
+.loader-content-wrapper {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  max-width: 600px;
+  padding: 0 40px;
+  transition: transform 0.3s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.3s ease, filter 0.3s ease;
+}
+
+.phase-blackout .loader-content {
+  transform: scaleX(0);
+  opacity: 0;
+  filter: blur(8px) brightness(2);
+}
+
+.implosion-pixel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  box-shadow: 0 0 20px var(--accent);
+  z-index: 21;
+}
+
+.phase-blackout .implosion-pixel {
+  animation: implosion-singularity 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes implosion-singularity {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(3); opacity: 1; filter: brightness(2); }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; filter: brightness(1.5); }
+}
+
+.phase-incision .implosion-pixel {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Keep site invisible until expansion */
+.phase-incision .loader-content,
+.phase-peephole .loader-content,
+.phase-expansion .loader-content {
+  display: none;
+}
+
+
+.progress-line-container {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 32px;
+  position: relative;
   overflow: hidden;
 }
 
-.loader-half {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 50vh;
-  background-color: #0b0b10;
-  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-  pointer-events: all;
-}
-
-.loader-top { top: 0; }
-.loader-bottom { bottom: 0; }
-
-.glow-edge-top {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
-  box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
-}
-
-.glow-edge-bottom {
+.progress-line {
   position: absolute;
   top: 0;
+  left: 0;
   width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-secondary), var(--accent));
-  box-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  transform-origin: center;
+  box-shadow: 0 0 15px var(--accent);
 }
 
-.loader-logo {
-  position: relative;
-  z-index: 10000;
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: white;
-  letter-spacing: 8px;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+.intro-text-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.text-line {
   font-family: var(--font-mono);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  margin: 0;
 }
 
-/* Animation Triggers */
-body.page-loaded .loader-top {
-  transform: translateY(-100%);
+.exploring-text {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
 }
 
-body.page-loaded .loader-bottom {
-  transform: translateY(100%);
-}
-
-body.page-loaded .loader-logo {
-  opacity: 0;
-  transform: scale(0.9);
+.jason-text {
+  font-size: 3.5rem;
+  letter-spacing: 0.15em;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @media (max-width: 768px) {
-  .loader-logo {
-    font-size: 2.5rem;
-    letter-spacing: 4px;
+  .jason-text {
+    font-size: 2.2rem;
+    letter-spacing: 0.1em;
   }
+  .exploring-text {
+    font-size: 0.9rem;
+  }
+  .panel-line-h {
+    width: 90vw;
+  }
+  .phase-peephole .loader-left { transform: translateX(-45vw); }
+  .phase-peephole .loader-right { transform: translateX(45vw); }
 }
