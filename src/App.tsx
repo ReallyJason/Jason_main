@@ -10,6 +10,7 @@ import CommandPalette from './components/CommandPalette';
 import { useLenis } from './utils/lenis';
 import ScrollProgress from './components/ScrollProgress';
 import SkeletonLoader from './components/SkeletonLoader';
+import Preloader from './components/Preloader';
 
 // Lazy load components
 const About = lazy(() => import('./components/About'));
@@ -25,6 +26,8 @@ function App() {
 
   return (
     <div className="app-container">
+      <div className="grain-overlay"></div>
+      <Preloader />
       <InteractiveBackground />
       <CursorLight />
       <ScrollProgress />

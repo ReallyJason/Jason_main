@@ -4,6 +4,7 @@ import './CursorLight.css';
 const CursorLight: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -15,16 +16,23 @@ const CursorLight: React.FC = () => {
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!isMobile && cursorRef.current) {
-        // Use transform for better performance than top/left
-        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
       }
     };
 
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const isInteractive = target.closest('a, button, .btn, .magnetic-wrapper');
+      setIsHovering(!!isInteractive);
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseover', handleMouseOver);
 
     return () => {
       window.removeEventListener('resize', checkMobile);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseover', handleMouseOver);
     };
   }, [isMobile]);
 
@@ -33,7 +41,7 @@ const CursorLight: React.FC = () => {
   return (
     <div 
       ref={cursorRef}
-      className="cursor-light"
+      className={`cursor-light ${isHovering ? 'cursor-hover' : ''}`}
       style={{ 
         position: 'fixed',
         left: 0,

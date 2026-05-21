@@ -13,7 +13,18 @@
   transform: translate(-50%, -50%);
   z-index: 100; /* Above most content */
   mix-blend-mode: screen;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.cursor-light.cursor-hover {
+  background: radial-gradient(
+    circle, 
+    rgba(0, 242, 255, 0.12) 0%, 
+    rgba(188, 19, 254, 0.08) 40%, 
+    transparent 70%
+  );
+  width: 700px;
+  height: 700px;
 }
 
 [data-theme="light"] .cursor-light {
