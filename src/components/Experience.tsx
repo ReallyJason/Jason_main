@@ -142,10 +142,10 @@ const Experience: React.FC = () => {
         }
       },
       images: [
-        { src: "/experience/Build_your_racingcart.jpg", alt: "Students' cardboard racing cart project" },
-        { src: "/experience/Super_hero_backstory.jpg", alt: "Superhero character design and backstory" },
-        { src: "/experience/Short_story.jpg", alt: "Student-created comic strip" },
-        { src: "/experience/paiting_of_superhero_in_galaxy.jpg", alt: "Art project: Superhero in the galaxy" }
+        { src: "/experience/Build_your_racingcart.webp", alt: "Students' cardboard racing cart project" },
+        { src: "/experience/Super_hero_backstory.webp", alt: "Superhero character design and backstory" },
+        { src: "/experience/Short_story.webp", alt: "Student-created comic strip" },
+        { src: "/experience/paiting_of_superhero_in_galaxy.webp", alt: "Art project: Superhero in the galaxy" }
       ]
     }
   ];

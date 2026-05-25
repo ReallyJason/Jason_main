@@ -32,8 +32,14 @@ const ScrollProgress: React.FC = () => {
     restDelta: 0.001
   });
 
-  const [activeSection, setActiveSection] = useState('hero');
   const sections = location.pathname === '/roblox' ? robloxSections : homeSections;
+  const [activeSection, setActiveSection] = useState(sections[0].id);
+  const [prevPath, setPrevPath] = useState(location.pathname);
+
+  if (location.pathname !== prevPath) {
+    setPrevPath(location.pathname);
+    setActiveSection(sections[0].id);
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,10 +58,6 @@ const ScrollProgress: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
-
-  useEffect(() => {
-    setActiveSection(sections[0].id);
-  }, [location.pathname, sections]);
 
   return (
     <div className="scroll-progress-container">

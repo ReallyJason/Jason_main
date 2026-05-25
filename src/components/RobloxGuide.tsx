@@ -282,8 +282,8 @@ sudo systemctl restart waydroid-container</code></pre>
 
               <p>Run the click loop (clicks every 15 seconds). Move your mouse over Roblox first:</p>
               <div className="code-block-container">
-                <pre><code>while true; do xdotool click 1; sleep 15; done</code></pre>
-                <button className="copy-btn" onClick={() => copyToClipboard('while true; do xdotool click 1; sleep 15; done')}><Copy size={14} /></button>
+                <pre><code>while true; do xdotool mousemove 341 192 click 1; sleep 30; done</code></pre>
+                <button className="copy-btn" onClick={() => copyToClipboard('while true; do xdotool mousemove 341 192 click 1; sleep 30; done')}><Copy size={14} /></button>
               </div>
               <p>Press <code>Ctrl + C</code> to stop.</p>
             </>
