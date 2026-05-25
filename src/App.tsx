@@ -48,10 +48,6 @@ function App() {
 
               <div className="section-divider" />
               
-              <Suspense fallback={<SkeletonLoader type="experience" />}>
-                <Experience />
-              </Suspense>
-
               <Suspense fallback={<SkeletonLoader type="project" />}>
                 <HiveShowcase />
               </Suspense>
@@ -62,6 +58,12 @@ function App() {
 
               <Suspense fallback={<SkeletonLoader type="project" />}>
                 <RoboGooseShowcase />
+              </Suspense>
+
+              <div className="section-divider" />
+
+              <Suspense fallback={<SkeletonLoader type="experience" />}>
+                <Experience />
               </Suspense>
 
               <div className="section-divider" />

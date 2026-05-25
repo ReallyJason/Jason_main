@@ -6,9 +6,10 @@ import './ScrollProgress.css';
 const homeSections = [
   { id: 'hero', label: 'Home' },
   { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Work' },
   { id: 'hive', label: 'HiveFive' },
+  { id: 'engine', label: 'Engine' },
   { id: 'robogoose', label: 'RoboGoose' },
+  { id: 'experience', label: 'Work' },
   { id: 'contact', label: 'Contact' }
 ];
 
