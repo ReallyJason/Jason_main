@@ -43,20 +43,28 @@ const ScrollProgress: React.FC = () => {
   }
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sectionElements = sections.map(s => document.getElementById(s.id));
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
+    let ticking = false;
 
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const el = sectionElements[i];
-        if (el && scrollPosition >= el.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sectionElements = sections.map(s => document.getElementById(s.id));
+          const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+          for (let i = sectionElements.length - 1; i >= 0; i--) {
+            const el = sectionElements[i];
+            if (el && scrollPosition >= el.offsetTop) {
+              setActiveSection(sections[i].id);
+              break;
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
 

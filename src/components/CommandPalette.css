@@ -67,8 +67,8 @@
 }
 
 .command-palette-results {
-  max-height: 400px;
-  padding: 8px;
+  max-height: 550px; /* Increased to allow all 9 navigation items to render without scroll clipping */
+  padding: 8px 8px 24px 8px; /* Pad the bottom item nicely */
   overflow-y: auto;
 }
 

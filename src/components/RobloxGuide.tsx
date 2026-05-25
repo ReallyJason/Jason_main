@@ -266,36 +266,6 @@ const sections = [
                 <pre><code>cd waydroid_script</code></pre>
                 <button className="copy-btn" onClick={() => copyToClipboard('cd waydroid_script')}><Copy size={14} /></button>
               </div>
-              <p>Update packages inside desktop session:</p>
-              <div className="code-block-container">
-                <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
-                <button className="copy-btn" onClick={() => copyToClipboard('sudo apt update && sudo apt upgrade -y')}><Copy size={14} /></button>
-              </div>
-              <p>Install curl dependencies:</p>
-              <div className="code-block-container">
-                <pre><code>sudo apt install curl ca-certificates -y</code></pre>
-                <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install curl ca-certificates -y')}><Copy size={14} /></button>
-              </div>
-              <p>Setup repo again to verify:</p>
-              <div className="code-block-container">
-                <pre><code>curl https://repo.waydro.id | sudo bash</code></pre>
-                <button className="copy-btn" onClick={() => copyToClipboard('curl https://repo.waydro.id | sudo bash')}><Copy size={14} /></button>
-              </div>
-              <p>Install Waydroid dependencies:</p>
-              <div className="code-block-container">
-                <pre><code>sudo apt install waydroid -y</code></pre>
-                <button className="copy-btn" onClick={() => copyToClipboard('sudo apt install waydroid -y')}><Copy size={14} /></button>
-              </div>
-              <p>Initialize GAPPS setup:</p>
-              <div className="code-block-container">
-                <pre><code>sudo waydroid init -s GAPPS</code></pre>
-                <button className="copy-btn" onClick={() => copyToClipboard('sudo waydroid init -s GAPPS')}><Copy size={14} /></button>
-              </div>
-              <p>Start the container service:</p>
-              <div className="code-block-container">
-                <pre><code>sudo systemctl start waydroid-container</code></pre>
-                <button className="copy-btn" onClick={() => copyToClipboard('sudo systemctl start waydroid-container')}><Copy size={14} /></button>
-              </div>
             </>
           )
         }

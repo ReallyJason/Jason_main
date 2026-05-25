@@ -97,6 +97,12 @@ const InteractiveBackground: React.FC = () => {
     };
 
     const animate = () => {
+      // Pause updates and clearRect if the document is hidden
+      if (document.hidden) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Reset shadow for performance on lines
@@ -129,7 +135,7 @@ const InteractiveBackground: React.FC = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     handleResize();
     animate();
 
