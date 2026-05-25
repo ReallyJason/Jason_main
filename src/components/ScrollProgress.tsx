@@ -6,9 +6,10 @@ import './ScrollProgress.css';
 const homeSections = [
   { id: 'hero', label: 'Home' },
   { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Work' },
   { id: 'hive', label: 'HiveFive' },
+  { id: 'engine', label: 'Engine' },
   { id: 'robogoose', label: 'RoboGoose' },
+  { id: 'experience', label: 'Work' },
   { id: 'contact', label: 'Contact' }
 ];
 
@@ -32,30 +33,40 @@ const ScrollProgress: React.FC = () => {
     restDelta: 0.001
   });
 
-  const [activeSection, setActiveSection] = useState('hero');
   const sections = location.pathname === '/roblox' ? robloxSections : homeSections;
+  const [activeSection, setActiveSection] = useState(sections[0].id);
+  const [prevPath, setPrevPath] = useState(location.pathname);
+
+  if (location.pathname !== prevPath) {
+    setPrevPath(location.pathname);
+    setActiveSection(sections[0].id);
+  }
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sectionElements = sections.map(s => document.getElementById(s.id));
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
+    let ticking = false;
 
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const el = sectionElements[i];
-        if (el && scrollPosition >= el.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sectionElements = sections.map(s => document.getElementById(s.id));
+          const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+          for (let i = sectionElements.length - 1; i >= 0; i--) {
+            const el = sectionElements[i];
+            if (el && scrollPosition >= el.offsetTop) {
+              setActiveSection(sections[i].id);
+              break;
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
-
-  useEffect(() => {
-    setActiveSection(sections[0].id);
-  }, [location.pathname, sections]);
 
   return (
     <div className="scroll-progress-container">

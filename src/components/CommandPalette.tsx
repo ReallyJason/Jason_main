@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { 
   Search, Command, User, Briefcase, Zap, 
-  Gamepad2, Mail, Sun, Download, Smartphone
+  Gamepad2, Mail, Sun, Download, Smartphone, Terminal
 } from 'lucide-react';
 import { playBlip } from '../utils/audio';
 import './CommandPalette.css';
@@ -22,6 +22,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isExternalOpen, onClose
     { id: 'about', title: 'Go to About', icon: <User size={18} />, section: '#about' },
     { id: 'exp', title: 'Go to Experience', icon: <Briefcase size={18} />, section: '#experience' },
     { id: 'hive', title: 'Go to HiveFive', icon: <Zap size={18} />, section: '#hive' },
+    { id: 'engine', title: 'Go to HTTP Engine', icon: <Terminal size={18} />, section: '#engine' },
     { id: 'goose', title: 'Go to RoboGoose', icon: <Gamepad2 size={18} />, section: '#robogoose' },
     { id: 'roblox', title: 'Roblox Setup Guide', icon: <Smartphone size={18} />, path: '/roblox' },
     { id: 'contact', title: 'Go to Contact', icon: <Mail size={18} />, section: '#contact' },

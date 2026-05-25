@@ -95,7 +95,7 @@ const HiveShowcase: React.FC = () => {
                   loop 
                   muted 
                   playsInline 
-                  preload="auto"
+                  preload="metadata"
                   title={`Preview of ${feature.title}`}
                 />
                 <div className="hive-video-overlay">

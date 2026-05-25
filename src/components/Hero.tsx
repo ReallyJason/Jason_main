@@ -84,12 +84,12 @@ const Hero: React.FC = () => {
           onTouchEnd={() => setIsActive(false)}
         >
           <img 
-            src={isActive ? "/buff_jason.png" : "/Jason.webp"} 
+            src={isActive ? "/buff_jason.webp" : "/Jason.webp"} 
             alt="Jason Hu" 
             className="hero-profile-pic" 
             fetchPriority="high"
           />
-          <div className="easter-egg-label">{isActive ? "100% REAL" : "100% BUG FREE*"}</div>
+          {isActive && <div className="easter-egg-label">100% REAL</div>}
         </div>
       </div>
     </section>

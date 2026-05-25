@@ -16,6 +16,7 @@ import Preloader from './components/Preloader';
 const About = lazy(() => import('./components/About'));
 const Experience = lazy(() => import('./components/Experience'));
 const HiveShowcase = lazy(() => import('./components/HiveShowcase'));
+const EngineShowcase = lazy(() => import('./components/EngineShowcase'));
 const RoboGooseShowcase = lazy(() => import('./components/RoboGooseShowcase'));
 const Contact = lazy(() => import('./components/Contact'));
 const RobloxGuide = lazy(() => import('./components/RobloxGuide'));
@@ -47,16 +48,22 @@ function App() {
 
               <div className="section-divider" />
               
-              <Suspense fallback={<SkeletonLoader type="experience" />}>
-                <Experience />
-              </Suspense>
-
               <Suspense fallback={<SkeletonLoader type="project" />}>
                 <HiveShowcase />
               </Suspense>
 
               <Suspense fallback={<SkeletonLoader type="project" />}>
+                <EngineShowcase />
+              </Suspense>
+
+              <Suspense fallback={<SkeletonLoader type="project" />}>
                 <RoboGooseShowcase />
+              </Suspense>
+
+              <div className="section-divider" />
+
+              <Suspense fallback={<SkeletonLoader type="experience" />}>
+                <Experience />
               </Suspense>
 
               <div className="section-divider" />
