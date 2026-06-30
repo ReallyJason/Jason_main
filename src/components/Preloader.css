@@ -17,6 +17,10 @@
   overflow: visible;
 }
 
+:root[data-theme="light"] .loader-panel {
+  background-color: #f1f5f9;
+}
+
 /* Horizontal panels (Top/Bottom) */
 .loader-top {
   top: 0;

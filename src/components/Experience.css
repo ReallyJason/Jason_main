@@ -173,7 +173,7 @@
 
 .mini-item:hover {
   border-color: var(--accent);
-  background: rgba(0, 242, 255, 0.05);
+  background: rgba(var(--accent-rgb), 0.05);
   transform: translateX(4px);
 }
 

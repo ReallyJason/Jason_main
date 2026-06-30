@@ -5,8 +5,8 @@ import './ThemeToggle.css';
 const ThemeToggle: React.FC = () => {
   const [isDark, setIsDark] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return savedTheme === 'dark' || (!savedTheme && prefersDark);
+    // Default to dark mode when no preference is saved
+    return savedTheme ? savedTheme === 'dark' : true;
   });
 
   useEffect(() => {

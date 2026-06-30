@@ -154,7 +154,8 @@
 .java { color: #007396; }
 .react { color: #61DAFB; }
 .node { color: #339933; }
-.express { color: #ffffff; }
+.express { color: #333333; }
+[data-theme="dark"] .express { color: #ffffff; }
 .html { color: #E34F26; }
 .css { color: #1572B6; }
 .docker { color: #2496ED; }
@@ -192,7 +193,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(var(--accent-rgb), 0.03);
   border-radius: 20px;
   font-size: 0.85rem;
   border: 1px solid var(--border-color);
@@ -201,7 +202,7 @@
 
 .skill-pill:hover {
   border-color: var(--accent);
-  background: rgba(0, 242, 255, 0.1);
+  background: rgba(var(--accent-rgb), 0.1);
 }
 
 .skill-pills-stacked {

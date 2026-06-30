@@ -27,7 +27,7 @@
 .nav-toggle-btn.active {
   border-color: var(--accent);
   color: var(--accent);
-  box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+  box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.2);
 }
 
 .nav-toggle-btn:hover {
