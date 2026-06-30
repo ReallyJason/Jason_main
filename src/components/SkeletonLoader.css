@@ -15,11 +15,11 @@
 }
 
 .shm {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(var(--accent-rgb), 0.04);
   border-radius: 12px;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
   backdrop-filter: blur(10px);
 }
 
@@ -33,7 +33,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.03),
+    rgba(var(--accent-rgb), 0.05),
     transparent
   );
   animation: shimmer 1.5s infinite;

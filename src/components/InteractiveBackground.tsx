@@ -19,6 +19,13 @@ const InteractiveBackground: React.FC = () => {
     const mouse = { x: -100, y: -100, radius: 200 };
     const mouseRadiusSq = mouse.radius * mouse.radius;
 
+    const getThemeColors = () => {
+      const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+      return isDark
+        ? { color1: '#00f2ff', color2: '#bc13fe' }
+        : { color1: '#3b82f6', color2: '#8b5cf6' };
+    };
+
     class Particle {
       x: number;
       y: number;
@@ -33,8 +40,8 @@ const InteractiveBackground: React.FC = () => {
         this.vx = (Math.random() - 0.5) * 0.4;
         this.vy = (Math.random() - 0.5) * 0.4;
         this.size = Math.random() * 3 + 1.5;
-        // Alternate between Neon Cyan and Electric Purple
-        this.color = Math.random() > 0.5 ? '#00f2ff' : '#bc13fe';
+        const colors = getThemeColors();
+        this.color = Math.random() > 0.5 ? colors.color1 : colors.color2;
       }
 
       update() {
@@ -134,12 +141,24 @@ const InteractiveBackground: React.FC = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
+    // Watch for theme changes and reinitialize particles
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.attributeName === 'data-theme') {
+          init();
+          break;
+        }
+      }
+    });
+    observer.observe(document.documentElement, { attributes: true });
+
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     handleResize();
     animate();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
